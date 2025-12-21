@@ -1,2 +1,2 @@
-# verbumde-api
+# Verbumdei-api
 Backend for Verbum Dei project
