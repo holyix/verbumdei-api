@@ -24,6 +24,7 @@ pub async fn insert_question(db: &Database, payload: CreateQuestion) -> mongodb:
     let doc = Question {
         id: Bson::ObjectId(ObjectId::new()),
         stage: payload.stage,
+        stage_label: payload.stage_label,
         prompt: payload.prompt,
         options: payload.options,
         tags: payload.tags,

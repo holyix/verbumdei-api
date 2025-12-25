@@ -36,4 +36,4 @@ for i in {1..30}; do
   fi
 done
 
-./scripts/api_workflow.sh
+./scripts/validate.sh

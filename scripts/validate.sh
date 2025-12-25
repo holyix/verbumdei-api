@@ -19,12 +19,40 @@ CREATE_RES="$(curl -sS -X POST "$API_BASE/questions" \
   -H 'Content-Type: application/json' \
   -d '{
     "stage": 1,
-    "prompt": "Sample prompt?",
+    "prompt": {
+      "en": "Sample prompt?",
+      "es": "Pregunta de ejemplo?",
+      "pt": "Pergunta de exemplo?"
+    },
     "options": [
-      { "text": "Yes", "correct": true, "explanation": null },
-      { "text": "No", "correct": false, "explanation": "Because ..." },
-      { "text": "Maybe", "correct": false, "explanation": null },
-      { "text": "Later", "correct": false, "explanation": null }
+      {
+        "text": { "en": "Yes", "es": "Sí", "pt": "Sim" },
+        "correct": true,
+        "explanation": {
+          "en": "Because ...",
+          "es": "Porque ...",
+          "pt": "Porque ..."
+        }
+      },
+      {
+        "text": { "en": "No", "es": "No", "pt": "Não" },
+        "correct": false,
+        "explanation": {
+          "en": "Because ...",
+          "es": "Porque ...",
+          "pt": "Porque ..."
+        }
+      },
+      {
+        "text": { "en": "Maybe", "es": "Tal vez", "pt": "Talvez" },
+        "correct": false,
+        "explanation": null
+      },
+      {
+        "text": { "en": "Later", "es": "Luego", "pt": "Depois" },
+        "correct": false,
+        "explanation": null
+      }
     ],
     "tags": ["demo"]
   }')"
@@ -57,3 +85,5 @@ fi
 # Confirm gone
 echo "Confirming deletion (should be 404)..."
 curl -s -o /dev/null -w '%{http_code}\n' "$API_BASE/questions/$QUESTION_ID"
+
+echo "All good!"

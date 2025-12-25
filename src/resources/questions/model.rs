@@ -1,20 +1,28 @@
+use chrono::Utc;
 use mongodb::bson::{Bson, DateTime};
 use serde::{Deserialize, Serialize};
-use chrono::Utc;
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct LocalizedText {
+    pub en: String,
+    pub es: String,
+    pub pt: String,
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CreateQuestion {
     pub stage: i32,
-    pub prompt: String,
+    pub stage_label: Option<LocalizedText>,
+    pub prompt: LocalizedText,
     pub options: Vec<OptionItem>,
     pub tags: Vec<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct OptionItem {
-    pub text: String,
+    pub text: LocalizedText,
     pub correct: bool,
-    pub explanation: Option<String>,
+    pub explanation: Option<LocalizedText>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -22,7 +30,8 @@ pub struct Question {
     #[serde(rename = "_id")]
     pub id: Bson,
     pub stage: i32,
-    pub prompt: String,
+    pub stage_label: Option<LocalizedText>,
+    pub prompt: LocalizedText,
     pub options: Vec<OptionItem>,
     pub tags: Vec<String>,
     pub created_at: DateTime,
@@ -31,16 +40,17 @@ pub struct Question {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct OptionDto {
-    pub text: String,
+    pub text: LocalizedText,
     pub correct: bool,
-    pub explanation: Option<String>,
+    pub explanation: Option<LocalizedText>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct QuestionDto {
     pub id: String,
     pub stage: i32,
-    pub prompt: String,
+    pub stage_label: Option<LocalizedText>,
+    pub prompt: LocalizedText,
     pub options: Vec<OptionDto>,
     pub tags: Vec<String>,
     pub created_at: String,
@@ -56,6 +66,7 @@ impl From<Question> for QuestionDto {
                 other => other.to_string(),
             },
             stage: q.stage,
+            stage_label: q.stage_label,
             prompt: q.prompt,
             options: q.options.into_iter().map(OptionDto::from).collect(),
             tags: q.tags,

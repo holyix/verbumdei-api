@@ -111,9 +111,11 @@ pub async fn create_question(
 }
 
 fn validate_create_question(payload: &CreateQuestion) -> Result<(), &'static str> {
-    if payload.prompt.trim().is_empty() {
-        return Err("prompt is required");
+    validate_localized(&payload.prompt, "prompt")?;
+    if let Some(label) = &payload.stage_label {
+        validate_localized(label, "stage_label")?;
     }
+
     if payload.options.len() != 4 {
         return Err("exactly four options are required");
     }
@@ -127,44 +129,85 @@ fn validate_create_question(payload: &CreateQuestion) -> Result<(), &'static str
         return Err("exactly one option must be marked correct");
     }
 
-    if payload
-        .options
-        .iter()
-        .any(|opt| opt.text.trim().is_empty())
-    {
-        return Err("all options must have non-empty text");
+    for opt in &payload.options {
+        validate_localized(&opt.text, "option text")?;
+        if let Some(expl) = &opt.explanation {
+            validate_localized(expl, "option explanation")?;
+        }
     }
 
     Ok(())
 }
 
+fn validate_localized(text: &crate::resources::questions::model::LocalizedText, field: &'static str) -> Result<(), &'static str> {
+    if text.en.trim().is_empty() || text.es.trim().is_empty() || text.pt.trim().is_empty() {
+        return Err(match field {
+            "prompt" => "prompt requires en, es, and pt",
+            "stage_label" => "stage_label requires en, es, and pt",
+            "option text" => "option text requires en, es, and pt",
+            "option explanation" => "option explanation requires en, es, and pt",
+            _ => "all locales must be provided",
+        });
+    }
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
-    use super::validate_create_question;
-    use crate::resources::questions::model::{CreateQuestion, OptionItem};
+    use super::{validate_create_question, validate_localized};
+    use crate::resources::questions::model::{CreateQuestion, LocalizedText, OptionItem};
 
     fn valid_question() -> CreateQuestion {
         CreateQuestion {
             stage: 1,
-            prompt: "Prompt".to_string(),
+            stage_label: Some(LocalizedText {
+                en: "Stage".to_string(),
+                es: "Etapa".to_string(),
+                pt: "Etapa".to_string(),
+            }),
+            prompt: LocalizedText {
+                en: "Prompt".to_string(),
+                es: "Pregunta".to_string(),
+                pt: "Pergunta".to_string(),
+            },
             options: vec![
                 OptionItem {
-                    text: "A".to_string(),
+                    text: LocalizedText {
+                        en: "A".to_string(),
+                        es: "A".to_string(),
+                        pt: "A".to_string(),
+                    },
                     correct: true,
                     explanation: None,
                 },
                 OptionItem {
-                    text: "B".to_string(),
+                    text: LocalizedText {
+                        en: "B".to_string(),
+                        es: "B".to_string(),
+                        pt: "B".to_string(),
+                    },
+                    correct: false,
+                    explanation: Some(LocalizedText {
+                        en: "because".to_string(),
+                        es: "porque".to_string(),
+                        pt: "porque".to_string(),
+                    }),
+                },
+                OptionItem {
+                    text: LocalizedText {
+                        en: "C".to_string(),
+                        es: "C".to_string(),
+                        pt: "C".to_string(),
+                    },
                     correct: false,
                     explanation: None,
                 },
                 OptionItem {
-                    text: "C".to_string(),
-                    correct: false,
-                    explanation: None,
-                },
-                OptionItem {
-                    text: "D".to_string(),
+                    text: LocalizedText {
+                        en: "D".to_string(),
+                        es: "D".to_string(),
+                        pt: "D".to_string(),
+                    },
                     correct: false,
                     explanation: None,
                 },
@@ -189,7 +232,7 @@ mod tests {
     #[test]
     fn rejects_empty_prompt() {
         let mut q = valid_question();
-        q.prompt = "   ".to_string();
+        q.prompt.en = "   ".to_string();
         assert!(validate_create_question(&q).is_err());
     }
 
@@ -210,7 +253,19 @@ mod tests {
     #[test]
     fn rejects_empty_option_text() {
         let mut q = valid_question();
-        q.options[0].text = "   ".to_string();
+        q.options[0].text.en = "   ".to_string();
         assert!(validate_create_question(&q).is_err());
+    }
+
+    #[test]
+    fn validate_localized_requires_all_locales() {
+        let mut lt = LocalizedText {
+            en: "a".into(),
+            es: "b".into(),
+            pt: "c".into(),
+        };
+        assert!(validate_localized(&lt, "prompt").is_ok());
+        lt.es.clear();
+        assert!(validate_localized(&lt, "prompt").is_err());
     }
 }

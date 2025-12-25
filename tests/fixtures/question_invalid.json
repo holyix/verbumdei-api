@@ -1,0 +1,25 @@
+{
+  "stage": 1,
+  "prompt": {
+    "en": "Sample prompt?",
+    "es": "Pregunta de ejemplo?"
+  },
+  "options": [
+    {
+      "text": { "en": "Yes", "es": "Sí", "pt": "Sim" },
+      "correct": true,
+      "explanation": null
+    },
+    {
+      "text": { "en": "No", "es": "No", "pt": "Não" },
+      "correct": false,
+      "explanation": null
+    },
+    {
+      "text": { "en": "Maybe", "es": "Tal vez", "pt": "Talvez" },
+      "correct": false,
+      "explanation": null
+    }
+  ],
+  "tags": ["demo"]
+}
