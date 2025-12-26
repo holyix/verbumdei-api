@@ -1,13 +1,8 @@
 use chrono::Utc;
 use mongodb::bson::{Bson, DateTime};
 use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct LocalizedText {
-    pub en: String,
-    pub es: String,
-    pub pt: String,
-}
+use std::collections::BTreeMap;
+pub type LocalizedText = BTreeMap<String, String>;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CreateQuestion {
@@ -34,7 +29,9 @@ pub struct Question {
     pub prompt: LocalizedText,
     pub options: Vec<OptionItem>,
     pub tags: Vec<String>,
+    #[serde(default = "old_date_bson")]
     pub created_at: DateTime,
+    #[serde(default = "old_date_bson")]
     pub updated_at: DateTime,
 }
 
@@ -84,4 +81,15 @@ impl From<OptionItem> for OptionDto {
             explanation: o.explanation,
         }
     }
+}
+
+fn old_date_bson() -> DateTime {
+    DateTime::from_chrono(
+        chrono::NaiveDate::from_ymd_opt(1920, 1, 1)
+            .unwrap()
+            .and_hms_opt(0, 0, 0)
+            .unwrap()
+            .and_local_timezone(chrono::Utc)
+            .unwrap(),
+    )
 }

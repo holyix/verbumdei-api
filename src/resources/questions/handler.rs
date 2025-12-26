@@ -7,6 +7,7 @@ use axum::{
 };
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use tracing::error;
 
 use crate::{
     resources::questions::{model::CreateQuestion, queries},
@@ -32,11 +33,14 @@ pub async fn get_question(
             Json(json!({ "error": "question not found" })),
         )
             .into_response(),
-        Err(_) => (
-            StatusCode::INTERNAL_SERVER_ERROR,
-            Json(json!({ "error": "failed to fetch question" })),
-        )
-            .into_response(),
+        Err(err) => {
+            error!(error = ?err, "failed to fetch question");
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "error": "failed to fetch question" })),
+            )
+                .into_response()
+        }
     }
 }
 
@@ -61,11 +65,14 @@ pub async fn list_questions(
 
     match queries::list_questions(&state.db, params.stage, limit, offset).await {
         Ok(items) => (StatusCode::OK, Json(QuestionsList { items })).into_response(),
-        Err(_) => (
-            StatusCode::INTERNAL_SERVER_ERROR,
-            Json(json!({ "error": "failed to list questions" })),
-        )
-            .into_response(),
+        Err(err) => {
+            error!(error = ?err, "failed to list questions");
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "error": "failed to list questions" })),
+            )
+                .into_response()
+        }
     }
 }
 
@@ -80,11 +87,14 @@ pub async fn delete_question(
             Json(json!({ "error": "question not found" })),
         )
             .into_response(),
-        Err(_) => (
-            StatusCode::INTERNAL_SERVER_ERROR,
-            Json(json!({ "error": "failed to delete question" })),
-        )
-            .into_response(),
+        Err(err) => {
+            error!(error = ?err, "failed to delete question");
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "error": "failed to delete question" })),
+            )
+                .into_response()
+        }
     }
 }
 
@@ -102,11 +112,14 @@ pub async fn create_question(
 
     match queries::insert_question(&state.db, payload).await {
         Ok(dto) => (StatusCode::CREATED, Json(dto)).into_response(),
-        Err(_) => (
-            StatusCode::INTERNAL_SERVER_ERROR,
-            Json(json!({ "error": "failed to create question" })),
-        )
-            .into_response(),
+        Err(err) => {
+            error!(error = ?err, "failed to create question");
+            (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({ "error": "failed to create question" })),
+            )
+                .into_response()
+        }
     }
 }
 
@@ -139,15 +152,24 @@ fn validate_create_question(payload: &CreateQuestion) -> Result<(), &'static str
     Ok(())
 }
 
-fn validate_localized(text: &crate::resources::questions::model::LocalizedText, field: &'static str) -> Result<(), &'static str> {
-    if text.en.trim().is_empty() || text.es.trim().is_empty() || text.pt.trim().is_empty() {
-        return Err(match field {
-            "prompt" => "prompt requires en, es, and pt",
-            "stage_label" => "stage_label requires en, es, and pt",
-            "option text" => "option text requires en, es, and pt",
-            "option explanation" => "option explanation requires en, es, and pt",
-            _ => "all locales must be provided",
-        });
+fn validate_localized(
+    text: &crate::resources::questions::model::LocalizedText,
+    field: &'static str,
+) -> Result<(), &'static str> {
+    const REQUIRED: [&str; 3] = ["en", "es", "pt"];
+    for locale in REQUIRED {
+        match text.get(locale) {
+            Some(val) if !val.trim().is_empty() => {}
+            _ => {
+                return Err(match field {
+                    "prompt" => "prompt requires en, es, and pt",
+                    "stage_label" => "stage_label requires en, es, and pt",
+                    "option text" => "option text requires en, es, and pt",
+                    "option explanation" => "option explanation requires en, es, and pt",
+                    _ => "all locales must be provided",
+                })
+            }
+        }
     }
     Ok(())
 }
@@ -158,56 +180,63 @@ mod tests {
     use crate::resources::questions::model::{CreateQuestion, LocalizedText, OptionItem};
 
     fn valid_question() -> CreateQuestion {
+        let mut stage_label = LocalizedText::new();
+        stage_label.insert("en".into(), "Stage".into());
+        stage_label.insert("es".into(), "Etapa".into());
+        stage_label.insert("pt".into(), "Etapa".into());
+
+        let mut prompt = LocalizedText::new();
+        prompt.insert("en".into(), "Prompt".into());
+        prompt.insert("es".into(), "Pregunta".into());
+        prompt.insert("pt".into(), "Pergunta".into());
+
+        let mut opt_a = LocalizedText::new();
+        opt_a.insert("en".into(), "A".into());
+        opt_a.insert("es".into(), "A".into());
+        opt_a.insert("pt".into(), "A".into());
+
+        let mut opt_b = LocalizedText::new();
+        opt_b.insert("en".into(), "B".into());
+        opt_b.insert("es".into(), "B".into());
+        opt_b.insert("pt".into(), "B".into());
+
+        let mut opt_c = LocalizedText::new();
+        opt_c.insert("en".into(), "C".into());
+        opt_c.insert("es".into(), "C".into());
+        opt_c.insert("pt".into(), "C".into());
+
+        let mut opt_d = LocalizedText::new();
+        opt_d.insert("en".into(), "D".into());
+        opt_d.insert("es".into(), "D".into());
+        opt_d.insert("pt".into(), "D".into());
+
+        let mut expl_b = LocalizedText::new();
+        expl_b.insert("en".into(), "because".into());
+        expl_b.insert("es".into(), "porque".into());
+        expl_b.insert("pt".into(), "porque".into());
+
         CreateQuestion {
             stage: 1,
-            stage_label: Some(LocalizedText {
-                en: "Stage".to_string(),
-                es: "Etapa".to_string(),
-                pt: "Etapa".to_string(),
-            }),
-            prompt: LocalizedText {
-                en: "Prompt".to_string(),
-                es: "Pregunta".to_string(),
-                pt: "Pergunta".to_string(),
-            },
+            stage_label: Some(stage_label),
+            prompt,
             options: vec![
                 OptionItem {
-                    text: LocalizedText {
-                        en: "A".to_string(),
-                        es: "A".to_string(),
-                        pt: "A".to_string(),
-                    },
+                    text: opt_a,
                     correct: true,
                     explanation: None,
                 },
                 OptionItem {
-                    text: LocalizedText {
-                        en: "B".to_string(),
-                        es: "B".to_string(),
-                        pt: "B".to_string(),
-                    },
+                    text: opt_b,
                     correct: false,
-                    explanation: Some(LocalizedText {
-                        en: "because".to_string(),
-                        es: "porque".to_string(),
-                        pt: "porque".to_string(),
-                    }),
+                    explanation: Some(expl_b),
                 },
                 OptionItem {
-                    text: LocalizedText {
-                        en: "C".to_string(),
-                        es: "C".to_string(),
-                        pt: "C".to_string(),
-                    },
+                    text: opt_c,
                     correct: false,
                     explanation: None,
                 },
                 OptionItem {
-                    text: LocalizedText {
-                        en: "D".to_string(),
-                        es: "D".to_string(),
-                        pt: "D".to_string(),
-                    },
+                    text: opt_d,
                     correct: false,
                     explanation: None,
                 },
@@ -232,7 +261,7 @@ mod tests {
     #[test]
     fn rejects_empty_prompt() {
         let mut q = valid_question();
-        q.prompt.en = "   ".to_string();
+        q.prompt.insert("en".into(), "   ".into());
         assert!(validate_create_question(&q).is_err());
     }
 
@@ -253,19 +282,18 @@ mod tests {
     #[test]
     fn rejects_empty_option_text() {
         let mut q = valid_question();
-        q.options[0].text.en = "   ".to_string();
+        q.options[0].text.insert("en".into(), "   ".into());
         assert!(validate_create_question(&q).is_err());
     }
 
     #[test]
     fn validate_localized_requires_all_locales() {
-        let mut lt = LocalizedText {
-            en: "a".into(),
-            es: "b".into(),
-            pt: "c".into(),
-        };
+        let mut lt = LocalizedText::new();
+        lt.insert("en".into(), "a".into());
+        lt.insert("es".into(), "b".into());
+        lt.insert("pt".into(), "c".into());
         assert!(validate_localized(&lt, "prompt").is_ok());
-        lt.es.clear();
+        lt.insert("es".into(), "".into());
         assert!(validate_localized(&lt, "prompt").is_err());
     }
 }

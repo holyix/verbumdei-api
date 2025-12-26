@@ -1,5 +1,6 @@
 use std::env;
 
+use mongodb::Client;
 use reqwest::StatusCode;
 use serde_json::Value;
 use uuid::Uuid;
@@ -23,6 +24,7 @@ async fn question_workflow_smoke() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let cfg = AppConfig::from_env();
+    let _guard = DbGuard::new(cfg.mongo_uri.clone(), test_db.clone());
     let db = db::init_mongo(&cfg).await?;
     let state = routes::api::ApiState {
         db,
@@ -59,7 +61,6 @@ async fn question_workflow_smoke() -> Result<(), Box<dyn std::error::Error>> {
     let delete_res = client.delete(format!("{}/questions/{}", base, id)).send().await?;
     assert_eq!(delete_res.status(), StatusCode::NO_CONTENT);
 
-    // Cleanup server
     server_handle.abort();
     Ok(())
 }
@@ -81,6 +82,7 @@ async fn question_create_rejects_invalid_payload() -> Result<(), Box<dyn std::er
     }
 
     let cfg = AppConfig::from_env();
+    let _guard = DbGuard::new(cfg.mongo_uri.clone(), test_db.clone());
     let db = db::init_mongo(&cfg).await?;
     let state = routes::api::ApiState {
         db,
@@ -103,7 +105,30 @@ async fn question_create_rejects_invalid_payload() -> Result<(), Box<dyn std::er
 
     assert_eq!(create_res.status(), StatusCode::BAD_REQUEST);
 
-    // Cleanup server
     server_handle.abort();
     Ok(())
+}
+
+struct DbGuard {
+    uri: String,
+    name: String,
+}
+
+impl DbGuard {
+    fn new(uri: String, name: String) -> Self {
+        Self { uri, name }
+    }
+}
+
+impl Drop for DbGuard {
+    fn drop(&mut self) {
+        let uri = self.uri.clone();
+        let name = self.name.clone();
+        let fut = async move {
+            if let Ok(client) = Client::with_uri_str(&uri).await {
+                let _ = client.database(&name).drop(None).await;
+            }
+        };
+        tokio::runtime::Handle::current().spawn(fut);
+    }
 }
