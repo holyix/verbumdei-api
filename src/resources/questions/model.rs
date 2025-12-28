@@ -11,6 +11,7 @@ pub struct CreateQuestion {
     pub prompt: LocalizedText,
     pub options: Vec<OptionItem>,
     pub tags: Vec<String>,
+    pub image_url: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -29,6 +30,7 @@ pub struct Question {
     pub prompt: LocalizedText,
     pub options: Vec<OptionItem>,
     pub tags: Vec<String>,
+    pub image_url: Option<String>,
     #[serde(default = "old_date_bson")]
     pub created_at: DateTime,
     #[serde(default = "old_date_bson")]
@@ -50,6 +52,7 @@ pub struct QuestionDto {
     pub prompt: LocalizedText,
     pub options: Vec<OptionDto>,
     pub tags: Vec<String>,
+    pub image_url: Option<String>,
     pub created_at: String,
     pub updated_at: String,
 }
@@ -67,6 +70,7 @@ impl From<Question> for QuestionDto {
             prompt: q.prompt,
             options: q.options.into_iter().map(OptionDto::from).collect(),
             tags: q.tags,
+            image_url: q.image_url,
             created_at: q.created_at.to_chrono().with_timezone(&Utc).to_rfc3339(),
             updated_at: q.updated_at.to_chrono().with_timezone(&Utc).to_rfc3339(),
         }

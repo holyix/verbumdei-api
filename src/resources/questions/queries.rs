@@ -28,6 +28,7 @@ pub async fn insert_question(db: &Database, payload: CreateQuestion) -> mongodb:
         prompt: payload.prompt,
         options: payload.options,
         tags: payload.tags,
+        image_url: payload.image_url,
         created_at: now,
         updated_at: now,
     };

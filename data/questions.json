@@ -6,6 +6,7 @@
       "es": "Creación",
       "pt": "Criação"
     },
+    "image_url": "/illustrations/question-creation.svg",
     "prompt": {
       "en": "In Genesis 1, what is humanity given over creation?",
       "es": "En Génesis 1, ¿qué se le confía a la humanidad sobre la creación?",
@@ -75,6 +76,7 @@
       "es": "Alianza",
       "pt": "Aliança"
     },
+    "image_url": "/illustrations/question-covenant.svg",
     "prompt": {
       "en": "What sign sealed the covenant with Noah after the flood?",
       "es": "¿Qué signo selló la alianza con Noé después del diluvio?",
@@ -144,6 +146,7 @@
       "es": "Iglesia",
       "pt": "Igreja"
     },
+    "image_url": "/illustrations/question-church.svg",
     "prompt": {
       "en": "According to Acts 2, what marked the Church’s birth at Pentecost?",
       "es": "Según Hechos 2, ¿qué marcó el nacimiento de la Iglesia en Pentecostés?",
