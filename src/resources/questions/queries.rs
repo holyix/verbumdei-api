@@ -1,13 +1,16 @@
 use futures_util::TryStreamExt;
 use mongodb::{
-    bson::{doc, oid::ObjectId, Bson, DateTime},
-    options::FindOptions,
     Collection, Database,
+    bson::{Bson, DateTime, doc, oid::ObjectId},
+    options::FindOptions,
 };
 
 use crate::resources::questions::model::{CreateQuestion, Question, QuestionDto};
 
-pub async fn find_question_by_id(db: &Database, id: &str) -> mongodb::error::Result<Option<QuestionDto>> {
+pub async fn find_question_by_id(
+    db: &Database,
+    id: &str,
+) -> mongodb::error::Result<Option<QuestionDto>> {
     let collection: Collection<Question> = db.collection("questions");
     let filter = match ObjectId::parse_str(id) {
         Ok(oid) => doc! { "_id": oid },
@@ -17,7 +20,10 @@ pub async fn find_question_by_id(db: &Database, id: &str) -> mongodb::error::Res
     Ok(res.map(QuestionDto::from))
 }
 
-pub async fn insert_question(db: &Database, payload: CreateQuestion) -> mongodb::error::Result<QuestionDto> {
+pub async fn insert_question(
+    db: &Database,
+    payload: CreateQuestion,
+) -> mongodb::error::Result<QuestionDto> {
     let collection: Collection<Question> = db.collection("questions");
 
     let now = DateTime::now();
@@ -61,10 +67,7 @@ pub async fn list_questions(
         filter.insert("stage", stage);
     }
 
-    let options = FindOptions::builder()
-        .skip(Some(offset))
-        .limit(Some(limit))
-        .build();
+    let options = FindOptions::builder().skip(Some(offset)).limit(Some(limit)).build();
 
     let mut cursor = collection.find(filter, options).await?;
 

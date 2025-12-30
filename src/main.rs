@@ -19,8 +19,7 @@ async fn main() {
     };
     let app = routes::api::router(state);
 
-    let listener =
-        tokio::net::TcpListener::bind(cfg.address()).await.expect("failed to bind address");
+    let listener = tokio::net::TcpListener::bind(cfg.address()).await.expect("failed to bind address");
     if let Err(err) = axum::serve(listener, app).await {
         tracing::error!("Server error: {err}");
     }

@@ -1,5 +1,5 @@
-use axum::routing::{get as axum_get, MethodRouter};
-use axum::{http::StatusCode, Json, extract::State};
+use axum::routing::{MethodRouter, get as axum_get};
+use axum::{Json, extract::State, http::StatusCode};
 use mongodb::bson::doc;
 use serde::Serialize;
 
@@ -36,11 +36,15 @@ pub async fn health_db(
     match state.db.run_command(doc! { "ping": 1 }, None).await {
         Ok(_) => (
             StatusCode::OK,
-            Json(HealthDbResponse { status: "ok" }),
+            Json(HealthDbResponse {
+                status: "ok",
+            }),
         ),
         Err(_) => (
             StatusCode::SERVICE_UNAVAILABLE,
-            Json(HealthDbResponse { status: "degraded" }),
+            Json(HealthDbResponse {
+                status: "degraded",
+            }),
         ),
     }
 }

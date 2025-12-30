@@ -22,6 +22,9 @@ build: ## Build the project
 test: ## Run tests
 	@cargo test
 
+run-dev: ## Run the application in development mode
+	@ENV=local RUST_LOG=debug cargo watch -x run
+
 run: ## Run the application
 	@cargo run
 

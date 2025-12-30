@@ -1,9 +1,9 @@
-use axum::routing::{get as axum_get, MethodRouter};
+use axum::routing::{MethodRouter, get as axum_get};
 use axum::{
+    Json,
     extract::{Path, Query, State},
     http::StatusCode,
     response::IntoResponse,
-    Json,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -22,23 +22,15 @@ pub fn collection() -> MethodRouter<ApiState> {
     axum_get(list_questions).post(create_question)
 }
 
-pub async fn get_question(
-    State(state): State<ApiState>,
-    Path(id): Path<String>,
-) -> impl IntoResponse {
+pub async fn get_question(State(state): State<ApiState>, Path(id): Path<String>) -> impl IntoResponse {
     match queries::find_question_by_id(&state.db, &id).await {
         Ok(Some(q)) => (StatusCode::OK, Json(q)).into_response(),
-        Ok(None) => (
-            StatusCode::NOT_FOUND,
-            Json(json!({ "error": "question not found" })),
-        )
-            .into_response(),
+        Ok(None) => {
+            (StatusCode::NOT_FOUND, Json(json!({ "error": "question not found" }))).into_response()
+        }
         Err(err) => {
             error!(error = ?err, "failed to fetch question");
-            (
-                StatusCode::INTERNAL_SERVER_ERROR,
-                Json(json!({ "error": "failed to fetch question" })),
-            )
+            (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "failed to fetch question" })))
                 .into_response()
         }
     }
@@ -64,13 +56,16 @@ pub async fn list_questions(
     let offset = params.offset.unwrap_or(0);
 
     match queries::list_questions(&state.db, params.stage, limit, offset).await {
-        Ok(items) => (StatusCode::OK, Json(QuestionsList { items })).into_response(),
+        Ok(items) => (
+            StatusCode::OK,
+            Json(QuestionsList {
+                items,
+            }),
+        )
+            .into_response(),
         Err(err) => {
             error!(error = ?err, "failed to list questions");
-            (
-                StatusCode::INTERNAL_SERVER_ERROR,
-                Json(json!({ "error": "failed to list questions" })),
-            )
+            (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "failed to list questions" })))
                 .into_response()
         }
     }
@@ -82,17 +77,12 @@ pub async fn delete_question(
 ) -> impl IntoResponse {
     match queries::delete_question_by_id(&state.db, &id).await {
         Ok(true) => StatusCode::NO_CONTENT.into_response(),
-        Ok(false) => (
-            StatusCode::NOT_FOUND,
-            Json(json!({ "error": "question not found" })),
-        )
-            .into_response(),
+        Ok(false) => {
+            (StatusCode::NOT_FOUND, Json(json!({ "error": "question not found" }))).into_response()
+        }
         Err(err) => {
             error!(error = ?err, "failed to delete question");
-            (
-                StatusCode::INTERNAL_SERVER_ERROR,
-                Json(json!({ "error": "failed to delete question" })),
-            )
+            (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "failed to delete question" })))
                 .into_response()
         }
     }
@@ -103,21 +93,14 @@ pub async fn create_question(
     Json(payload): Json<CreateQuestion>,
 ) -> impl IntoResponse {
     if let Err(msg) = validate_create_question(&payload) {
-        return (
-            StatusCode::BAD_REQUEST,
-            Json(json!({ "error": msg })),
-        )
-            .into_response();
+        return (StatusCode::BAD_REQUEST, Json(json!({ "error": msg }))).into_response();
     }
 
     match queries::insert_question(&state.db, payload).await {
         Ok(dto) => (StatusCode::CREATED, Json(dto)).into_response(),
         Err(err) => {
             error!(error = ?err, "failed to create question");
-            (
-                StatusCode::INTERNAL_SERVER_ERROR,
-                Json(json!({ "error": "failed to create question" })),
-            )
+            (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "failed to create question" })))
                 .into_response()
         }
     }
@@ -133,11 +116,7 @@ fn validate_create_question(payload: &CreateQuestion) -> Result<(), &'static str
         return Err("exactly four options are required");
     }
 
-    let correct_count = payload
-        .options
-        .iter()
-        .filter(|opt| opt.correct)
-        .count();
+    let correct_count = payload.options.iter().filter(|opt| opt.correct).count();
     if correct_count != 1 {
         return Err("exactly one option must be marked correct");
     }
@@ -167,7 +146,7 @@ fn validate_localized(
                     "option text" => "option text requires en, es, and pt",
                     "option explanation" => "option explanation requires en, es, and pt",
                     _ => "all locales must be provided",
-                })
+                });
             }
         }
     }
@@ -242,6 +221,7 @@ mod tests {
                 },
             ],
             tags: vec!["tag".to_string()],
+            image_url: None,
         }
     }
 
