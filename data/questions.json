@@ -1,350 +1,416 @@
 [
-  {
-    "stage": 1,
-    "stage_label": {
-      "en": "Creation",
-      "es": "Creación",
-      "pt": "Criação"
+    {
+        "_id": {
+            "$oid": "69505afbef08f1cdfe808156"
+        },
+        "stage": 1,
+        "stage_label": {
+            "en": "Creation",
+            "es": "Creación",
+            "pt": "Criação",
+            "sv": "Skapelsen"
+        },
+        "image_url": "/illustrations/question-creation.svg",
+        "prompt": {
+            "en": "In Genesis 1, what is humanity given over creation?",
+            "es": "En Génesis 1, ¿qué se le confía a la humanidad sobre la creación?",
+            "pt": "Em Gênesis 1, o que é confiado à humanidade sobre a criação?",
+            "sv": "I Första Mosebok 1, vad anförtros människan över skapelsen?"
+        },
+        "options": [
+            {
+                "text": {
+                    "en": "To rule, steward, and care for it",
+                    "es": "Gobernarla, administrarla y cuidarla",
+                    "pt": "Governar, administrar e cuidar",
+                    "sv": "Att råda, förvalta och ta hand om den"
+                },
+                "correct": true,
+                "explanation": {
+                    "en": "Genesis 1:26-28 gives humanity dominion and stewardship over creation.",
+                    "es": "Génesis 1:26-28 entrega a la humanidad dominio y mayordomía sobre la creación.",
+                    "pt": "Gênesis 1:26-28 concede ao ser humano domínio e cuidado sobre a criação.",
+                    "sv": "Första Mosebok 1:26–28 ger människan herravälde och förvaltarskap över skapelsen."
+                }
+            },
+            {
+                "text": {
+                    "en": "Unlimited domination for profit",
+                    "es": "Dominio ilimitado para lucro",
+                    "pt": "Domínio ilimitado para lucro",
+                    "sv": "Obegränsat herravälde för egen vinning"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "Scripture frames this as care, not exploitation.",
+                    "es": "La Escritura lo presenta como cuidado, no explotación.",
+                    "pt": "A Escritura apresenta como cuidado, não exploração.",
+                    "sv": "Skriften framställer detta som omsorg, inte exploatering."
+                }
+            },
+            {
+                "text": {
+                    "en": "No responsibility at all",
+                    "es": "Ninguna responsabilidad",
+                    "pt": "Nenhuma responsabilidade",
+                    "sv": "Inget ansvar alls"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "Humanity is explicitly commissioned to cultivate and keep.",
+                    "es": "La humanidad es enviada a cultivar y guardar.",
+                    "pt": "A humanidade é chamada a cultivar e guardar.",
+                    "sv": "Människan får uttryckligen uppdraget att odla och bevara."
+                }
+            },
+            {
+                "text": {
+                    "en": "Only angels steward creation",
+                    "es": "Solo los ángeles administran la creación",
+                    "pt": "Apenas os anjos cuidam da criação",
+                    "sv": "Endast änglar förvaltar skapelsen"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "The command is given to mankind, male and female.",
+                    "es": "El mandato es dado a la humanidad, varón y mujer.",
+                    "pt": "O mandato é dado à humanidade, homem e mulher.",
+                    "sv": "Uppdraget ges till människan, man och kvinna."
+                }
+            }
+        ],
+        "tags": [],
+        "source": "Genesis 1:26-28"
     },
-    "image_url": "/illustrations/question-creation.svg",
-    "prompt": {
-      "en": "In Genesis 1, what is humanity given over creation?",
-      "es": "En Génesis 1, ¿qué se le confía a la humanidad sobre la creación?",
-      "pt": "Em Gênesis 1, o que é confiado à humanidade sobre a criação?"
+    {
+        "_id": {
+            "$oid": "69505afbef08f1cdfe808157"
+        },
+        "stage": 2,
+        "stage_label": {
+            "en": "Covenant",
+            "es": "Alianza",
+            "pt": "Aliança",
+            "sv": "Förbund"
+        },
+        "image_url": "/illustrations/question-covenant.svg",
+        "prompt": {
+            "en": "What sign sealed the covenant with Noah after the flood?",
+            "es": "¿Qué signo selló la alianza con Noé después del diluvio?",
+            "pt": "Qual sinal selou a aliança com Noé após o dilúvio?",
+            "sv": "Vilket tecken beseglade förbundet med Noa efter floden?"
+        },
+        "options": [
+            {
+                "text": {
+                    "en": "A burning bush",
+                    "es": "Una zarza ardiente",
+                    "pt": "Uma sarça ardente",
+                    "sv": "En brinnande buske"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "That was Moses' call, not Noah's covenant sign.",
+                    "es": "Esa fue la llamada de Moisés, no el signo para Noé.",
+                    "pt": "Foi o chamado de Moisés, não o sinal para Noé.",
+                    "sv": "Detta var Mose kallelse, inte Noas förbundstecken."
+                }
+            },
+            {
+                "text": {
+                    "en": "The rainbow in the clouds",
+                    "es": "El arcoíris en las nubes",
+                    "pt": "O arco-íris nas nuvens",
+                    "sv": "Regnbågen på himlen"
+                },
+                "correct": true,
+                "explanation": {
+                    "en": "Genesis 9:12-17: God sets a bow in the clouds as a sign of His promise.",
+                    "es": "Génesis 9:12-17: Dios pone un arco en las nubes como signo de su promesa.",
+                    "pt": "Gênesis 9:12-17: Deus coloca um arco nas nuvens como sinal da promessa.",
+                    "sv": "Första Mosebok 9:12–17: Gud sätter regnbågen som tecken på sitt löfte."
+                }
+            },
+            {
+                "text": {
+                    "en": "Tablets of stone",
+                    "es": "Tablas de piedra",
+                    "pt": "Tábuas de pedra",
+                    "sv": "Stentavlor"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "The tablets come later with Moses at Sinai.",
+                    "es": "Las tablas llegan después, con Moisés en el Sinaí.",
+                    "pt": "As tábuas vêm depois, com Moisés no Sinai.",
+                    "sv": "Stentavlorna kommer senare med Mose på Sinai."
+                }
+            },
+            {
+                "text": {
+                    "en": "A pillar of fire",
+                    "es": "Una columna de fuego",
+                    "pt": "Uma coluna de fogo",
+                    "sv": "En eldstod"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "Pillar of fire guided Israel in the Exodus.",
+                    "es": "La columna de fuego guió a Israel en el Éxodo.",
+                    "pt": "A coluna de fogo guiou Israel no Êxodo.",
+                    "sv": "Eldstoden ledde Israel under uttåget."
+                }
+            }
+        ],
+        "tags": [],
+        "source": "Genesis 9:12-17"
     },
-    "options": [
-      {
-        "text": {
-          "en": "To rule, steward, and care for it",
-          "es": "Gobernarla, administrarla y cuidarla",
-          "pt": "Governar, administrar e cuidar"
+    {
+        "_id": {
+            "$oid": "69505afbef08f1cdfe808158"
         },
-        "correct": true,
-        "explanation": {
-          "en": "Genesis 1:26-28 gives humanity dominion and stewardship over creation.",
-          "es": "Génesis 1:26-28 entrega a la humanidad dominio y mayordomía sobre la creación.",
-          "pt": "Gênesis 1:26-28 concede ao ser humano domínio e cuidado sobre a criação."
-        }
-      },
-      {
-        "text": {
-          "en": "Unlimited domination for profit",
-          "es": "Dominio ilimitado para lucro",
-          "pt": "Domínio ilimitado para lucro"
+        "stage": 5,
+        "stage_label": {
+            "en": "Christ",
+            "es": "Cristo",
+            "pt": "Cristo",
+            "sv": "Kristus"
         },
-        "correct": false,
-        "explanation": {
-          "en": "Scripture frames this as care, not exploitation.",
-          "es": "La Escritura lo presenta como cuidado, no explotación.",
-          "pt": "A Escritura apresenta como cuidado, não exploração."
-        }
-      },
-      {
-        "text": {
-          "en": "No responsibility at all",
-          "es": "Ninguna responsabilidad",
-          "pt": "Nenhuma responsabilidade"
+        "image_url": "/illustrations/question-christ.svg",
+        "prompt": {
+            "en": "Why is the Resurrection central to Christian faith?",
+            "es": "¿Por qué la Resurrección es central para la fe cristiana?",
+            "pt": "Por que a Ressurreição é central para a fé cristã?",
+            "sv": "Varför är uppståndelsen central i den kristna tron?"
         },
-        "correct": false,
-        "explanation": {
-          "en": "Humanity is explicitly commissioned to cultivate and keep.",
-          "es": "La humanidad es enviada a cultivar y guardar.",
-          "pt": "A humanidade é chamada a cultivar e guardar."
-        }
-      },
-      {
-        "text": {
-          "en": "Only angels steward creation",
-          "es": "Solo los ángeles administran la creación",
-          "pt": "Apenas os anjos cuidam da criação"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "The command is given to mankind, male and female.",
-          "es": "El mandato es dado a la humanidad, varón y mujer.",
-          "pt": "O mandato é dado à humanidade, homem e mulher."
-        }
-      }
-    ],
-    "tags": [],
-    "source": "Genesis 1:26-28"
-  },
-  {
-    "stage": 2,
-    "stage_label": {
-      "en": "Covenant",
-      "es": "Alianza",
-      "pt": "Aliança"
+        "options": [
+            {
+                "text": {
+                    "en": "It confirms Jesus as Son of God and conquers death",
+                    "es": "Confirma a Jesús como Hijo de Dios y vence la muerte",
+                    "pt": "Confirma Jesus como Filho de Deus e vence a morte",
+                    "sv": "Den bekräftar Jesus som Guds Son och besegrar döden"
+                },
+                "correct": true,
+                "explanation": {
+                    "en": "Paul says without the Resurrection our faith is in vain (1 Cor 15:14); it vindicates Christ and defeats death.",
+                    "es": "Pablo dice que sin la Resurrección nuestra fe es vana (1 Co 15:14); vindica a Cristo y vence la muerte.",
+                    "pt": "Paulo diz que sem a Ressurreição a fé é vã (1 Cor 15:14); ela confirma Cristo e vence a morte.",
+                    "sv": "Paulus säger att utan uppståndelsen är tron meningslös (1 Kor 15:14); den bekräftar Kristus och besegrar döden."
+                }
+            },
+            {
+                "text": {
+                    "en": "It removes any need for faith or discipleship",
+                    "es": "Elimina toda necesidad de fe o discipulado",
+                    "pt": "Remove qualquer necessidade de fé ou discipulado",
+                    "sv": "Den gör tro och lärjungaskap överflödiga"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "The Resurrection invites faith and discipleship; it doesn’t make them unnecessary.",
+                    "es": "La Resurrección invita a la fe y al discipulado; no los vuelve innecesarios.",
+                    "pt": "A Ressurreição convida à fé e ao discipulado; não os torna desnecessários.",
+                    "sv": "Uppståndelsen kallar till tro och lärjungaskap, den upphäver dem inte."
+                }
+            },
+            {
+                "text": {
+                    "en": "It replaces all of Jesus’ teachings",
+                    "es": "Reemplaza todas las enseñanzas de Jesús",
+                    "pt": "Substitui todos os ensinamentos de Jesus",
+                    "sv": "Den ersätter alla Jesu läror"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "It fulfills and confirms His teachings, not replaces them.",
+                    "es": "Las cumple y confirma, no las reemplaza.",
+                    "pt": "Ela confirma e cumpre os ensinamentos, não os substitui.",
+                    "sv": "Den uppfyller och bekräftar hans undervisning, den ersätter den inte."
+                }
+            },
+            {
+                "text": {
+                    "en": "It only symbolizes good ideas, not a real event",
+                    "es": "Solo simboliza buenas ideas, no un hecho real",
+                    "pt": "Apenas simboliza boas ideias, não um fato real",
+                    "sv": "Den symboliserar bara goda idéer, inte en verklig händelse"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "The New Testament proclaims a real, bodily Resurrection witnessed by many.",
+                    "es": "El Nuevo Testamento proclama una Resurrección real y corporal, vista por muchos.",
+                    "pt": "O Novo Testamento proclama uma Ressurreição real e corporal, testemunhada por muitos.",
+                    "sv": "Nya testamentet förkunnar en verklig, kroppslig uppståndelse bevittnad av många."
+                }
+            }
+        ],
+        "tags": [],
+        "source": "1 Corinthians 15:14"
     },
-    "image_url": "/illustrations/question-covenant.svg",
-    "prompt": {
-      "en": "What sign sealed the covenant with Noah after the flood?",
-      "es": "¿Qué signo selló la alianza con Noé después del diluvio?",
-      "pt": "Qual sinal selou a aliança com Noé após o dilúvio?"
+    {
+        "_id": {
+            "$oid": "69505afbef08f1cdfe808159"
+        },
+        "stage": 3,
+        "stage_label": {
+            "en": "Church",
+            "es": "Iglesia",
+            "pt": "Igreja",
+            "sv": "Kyrkan"
+        },
+        "image_url": "/illustrations/question-church.svg",
+        "prompt": {
+            "en": "According to Acts 2, what marked the Church’s birth at Pentecost?",
+            "es": "Según Hechos 2, ¿qué marcó el nacimiento de la Iglesia en Pentecostés?",
+            "pt": "Segundo Atos 2, o que marcou o nascimento da Igreja em Pentecostes?",
+            "sv": "Enligt Apostlagärningarna 2, vad markerade kyrkans födelse vid pingsten?"
+        },
+        "options": [
+            {
+                "text": {
+                    "en": "The casting of lots for Matthias",
+                    "es": "Echar suertes por Matías",
+                    "pt": "Lançar sortes para Matias",
+                    "sv": "Lottkastningen för Mattias"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "That happened before Pentecost.",
+                    "es": "Eso ocurrió antes de Pentecostés.",
+                    "pt": "Isso ocorreu antes de Pentecostes.",
+                    "sv": "Detta skedde före pingsten."
+                }
+            },
+            {
+                "text": {
+                    "en": "Tongues as of fire and the Holy Spirit’s outpouring",
+                    "es": "Lenguas como de fuego y la efusión del Espíritu Santo",
+                    "pt": "Línguas como de fogo e a efusão do Espírito Santo",
+                    "sv": "Tungor som av eld och Andens utgjutelse"
+                },
+                "correct": true,
+                "explanation": {
+                    "en": "Acts 2:1-4 describes the Spirit descending with wind and fire.",
+                    "es": "Hechos 2:1-4 describe al Espíritu descendiendo con viento y fuego.",
+                    "pt": "Atos 2:1-4 descreve o Espírito descendo com vento e fogo.",
+                    "sv": "Apostlagärningarna 2:1–4 beskriver Andens nedstigande med vind och eld."
+                }
+            },
+            {
+                "text": {
+                    "en": "Building a stone temple",
+                    "es": "Construir un templo de piedra",
+                    "pt": "Construir um templo de pedra",
+                    "sv": "Att bygga ett tempel av sten"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "The early Church met in homes and the temple courts; no new temple was built.",
+                    "es": "La Iglesia primitiva se reunía en casas y en el Templo; no se construyó uno nuevo.",
+                    "pt": "A Igreja primitiva se reunia em casas e no Templo; não foi construído um novo.",
+                    "sv": "Den tidiga kyrkan samlades i hem och på tempelområdet; inget nytt tempel byggdes."
+                }
+            },
+            {
+                "text": {
+                    "en": "A council at Jerusalem",
+                    "es": "Un concilio en Jerusalén",
+                    "pt": "Um concílio em Jerusalém",
+                    "sv": "Ett kyrkomöte i Jerusalem"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "The Jerusalem Council in Acts 15 happened later.",
+                    "es": "El Concilio de Jerusalén en Hechos 15 fue después.",
+                    "pt": "O Concílio de Jerusalém em Atos 15 aconteceu depois.",
+                    "sv": "Jerusalemsmötet i Apostlagärningarna 15 skedde senare."
+                }
+            }
+        ],
+        "tags": [],
+        "source": "Acts 2:1-4"
     },
-    "options": [
-      {
-        "text": {
-          "en": "A burning bush",
-          "es": "Una zarza ardiente",
-          "pt": "Uma sarça ardente"
+    {
+        "_id": {
+            "$oid": "69505afbef08f1cdfe80815a"
         },
-        "correct": false,
-        "explanation": {
-          "en": "That was Moses' call, not Noah's covenant sign.",
-          "es": "Esa fue la llamada de Moisés, no el signo para Noé.",
-          "pt": "Foi o chamado de Moisés, não o sinal para Noé."
-        }
-      },
-      {
-        "text": {
-          "en": "The rainbow in the clouds",
-          "es": "El arcoíris en las nubes",
-          "pt": "O arco-íris nas nuvens"
+        "stage": 4,
+        "stage_label": {
+            "en": "Kingdom",
+            "es": "Reino",
+            "pt": "Reino",
+            "sv": "Riket"
         },
-        "correct": true,
-        "explanation": {
-          "en": "Genesis 9:12-17: God sets a bow in the clouds as a sign of His promise.",
-          "es": "Génesis 9:12-17: Dios pone un arco en las nubes como signo de su promesa.",
-          "pt": "Gênesis 9:12-17: Deus coloca um arco nas nuvens como sinal da promessa."
-        }
-      },
-      {
-        "text": {
-          "en": "Tablets of stone",
-          "es": "Tablas de piedra",
-          "pt": "Tábuas de pedra"
+        "prompt": {
+            "en": "What key promise did God make to King David in 2 Samuel 7?",
+            "es": "¿Qué promesa clave hizo Dios al rey David en 2 Samuel 7?",
+            "pt": "Que promessa central Deus fez ao rei Davi em 2 Samuel 7?",
+            "sv": "Vilket centralt löfte gav Gud kung David i 2 Samuelsboken 7?"
         },
-        "correct": false,
-        "explanation": {
-          "en": "The tablets come later with Moses at Sinai.",
-          "es": "Las tablas llegan después, con Moisés en el Sinaí.",
-          "pt": "As tábuas vêm depois, com Moisés no Sinai."
-        }
-      },
-      {
-        "text": {
-          "en": "A pillar of fire",
-          "es": "Una columna de fuego",
-          "pt": "Uma coluna de fogo"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "Pillar of fire guided Israel in the Exodus.",
-          "es": "La columna de fuego guió a Israel en el Éxodo.",
-          "pt": "A coluna de fogo guiou Israel no Êxodo."
-        }
-      }
-    ],
-    "tags": [],
-    "source": "Genesis 9:12-17"
-  },
-  {
-    "stage": 3,
-    "stage_label": {
-      "en": "Church",
-      "es": "Iglesia",
-      "pt": "Igreja"
-    },
-    "image_url": "/illustrations/question-church.svg",
-    "prompt": {
-      "en": "According to Acts 2, what marked the Church’s birth at Pentecost?",
-      "es": "Según Hechos 2, ¿qué marcó el nacimiento de la Iglesia en Pentecostés?",
-      "pt": "Segundo Atos 2, o que marcou o nascimento da Igreja em Pentecostes?"
-    },
-    "options": [
-      {
-        "text": {
-          "en": "The casting of lots for Matthias",
-          "es": "Echar suertes por Matías",
-          "pt": "Lançar sortes para Matias"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "That happened before Pentecost.",
-          "es": "Eso ocurrió antes de Pentecostés.",
-          "pt": "Isso ocorreu antes de Pentecostes."
-        }
-      },
-      {
-        "text": {
-          "en": "Tongues as of fire and the Holy Spirit’s outpouring",
-          "es": "Lenguas como de fuego y la efusión del Espíritu Santo",
-          "pt": "Línguas como de fogo e a efusão do Espírito Santo"
-        },
-        "correct": true,
-        "explanation": {
-          "en": "Acts 2:1-4 describes the Spirit descending with wind and fire.",
-          "es": "Hechos 2:1-4 describe al Espíritu descendiendo con viento y fuego.",
-          "pt": "Atos 2:1-4 descreve o Espírito descendo com vento e fogo."
-        }
-      },
-      {
-        "text": {
-          "en": "Building a stone temple",
-          "es": "Construir un templo de piedra",
-          "pt": "Construir um templo de pedra"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "The early Church met in homes and the temple courts; no new temple was built.",
-          "es": "La Iglesia primitiva se reunía en casas y en el Templo; no se construyó uno nuevo.",
-          "pt": "A Igreja primitiva se reunia em casas e no Templo; não foi construído um novo."
-        }
-      },
-      {
-        "text": {
-          "en": "A council at Jerusalem",
-          "es": "Un concilio en Jerusalén",
-          "pt": "Um concílio em Jerusalém"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "The Jerusalem Council in Acts 15 happened later.",
-          "es": "El Concilio de Jerusalén en Hechos 15 fue después.",
-          "pt": "O Concílio de Jerusalém em Atos 15 aconteceu depois."
-        }
-      }
-    ],
-    "tags": [],
-    "source": "Acts 2:1-4"
-  },
-  {
-    "stage": 4,
-    "stage_label": {
-      "en": "Kingdom",
-      "es": "Reino",
-      "pt": "Reino"
-    },
-    "prompt": {
-      "en": "What key promise did God make to King David in 2 Samuel 7?",
-      "es": "¿Qué promesa clave hizo Dios al rey David en 2 Samuel 7?",
-      "pt": "Que promessa central Deus fez ao rei Davi em 2 Samuel 7?"
-    },
-    "options": [
-      {
-        "text": {
-          "en": "An everlasting throne through his descendant",
-          "es": "Un trono eterno por medio de su descendiente",
-          "pt": "Um trono eterno por meio de seu descendente"
-        },
-        "correct": true,
-        "explanation": {
-          "en": "God covenants that David’s dynasty will endure through an heir, fulfilled in Christ (2 Sam 7:12-16).",
-          "es": "Dios promete que la dinastía de David perdurará en un heredero, cumplido en Cristo (2 Sam 7:12-16).",
-          "pt": "Deus promete que a dinastia de Davi permanecerá por um herdeiro, cumprida em Cristo (2 Sm 7:12-16)."
-        }
-      },
-      {
-        "text": {
-          "en": "Immediate victory over Rome",
-          "es": "Victoria inmediata sobre Roma",
-          "pt": "Vitória imediata sobre Roma"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "Rome is centuries later; the promise was a lasting house, not political timing.",
-          "es": "Roma es siglos después; la promesa era una casa duradera, no un plazo político.",
-          "pt": "Roma é séculos depois; a promessa era uma casa duradoura, não um prazo político."
-        }
-      },
-      {
-        "text": {
-          "en": "That David would build the first temple himself",
-          "es": "Que David construiría él mismo el primer templo",
-          "pt": "Que Davi construiria ele mesmo o primeiro templo"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "God says his son will build it; Solomon fulfills that, not David.",
-          "es": "Dios dice que su hijo lo construirá; Salomón lo cumple, no David.",
-          "pt": "Deus diz que seu filho o construirá; Salomão cumpre, não Davi."
-        }
-      },
-      {
-        "text": {
-          "en": "To end prophecy after David’s reign",
-          "es": "Terminar la profecía tras el reinado de David",
-          "pt": "Encerrar a profecia após o reinado de Davi"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "Prophecy continues; the promise is about a perpetual throne.",
-          "es": "La profecía continúa; la promesa trata de un trono perpetuo.",
-          "pt": "A profecia continua; a promessa é sobre um trono perpétuo."
-        }
-      }
-    ],
-    "tags": [],
-    "source": "2 Samuel 7:12-16"
-  },
-  {
-    "stage": 5,
-    "stage_label": {
-      "en": "Christ",
-      "es": "Cristo",
-      "pt": "Cristo"
-    },
-    "prompt": {
-      "en": "Why is the Resurrection central to Christian faith?",
-      "es": "¿Por qué la Resurrección es central para la fe cristiana?",
-      "pt": "Por que a Ressurreição é central para a fé cristã?"
-    },
-    "options": [
-      {
-        "text": {
-          "en": "It confirms Jesus as Son of God and conquers death",
-          "es": "Confirma a Jesús como Hijo de Dios y vence la muerte",
-          "pt": "Confirma Jesus como Filho de Deus e vence a morte"
-        },
-        "correct": true,
-        "explanation": {
-          "en": "Paul says without the Resurrection our faith is in vain (1 Cor 15:14); it vindicates Christ and defeats death.",
-          "es": "Pablo dice que sin la Resurrección nuestra fe es vana (1 Co 15:14); vindica a Cristo y vence la muerte.",
-          "pt": "Paulo diz que sem a Ressurreição a fé é vã (1 Cor 15:14); ela confirma Cristo e vence a morte."
-        }
-      },
-      {
-        "text": {
-          "en": "It removes any need for faith or discipleship",
-          "es": "Elimina toda necesidad de fe o discipulado",
-          "pt": "Remove qualquer necessidade de fé ou discipulado"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "The Resurrection invites faith and discipleship; it doesn’t make them unnecessary.",
-          "es": "La Resurrección invita a la fe y al discipulado; no los vuelve innecesarios.",
-          "pt": "A Ressurreição convida à fé e ao discipulado; não os torna desnecessários."
-        }
-      },
-      {
-        "text": {
-          "en": "It replaces all of Jesus’ teachings",
-          "es": "Reemplaza todas las enseñanzas de Jesús",
-          "pt": "Substitui todos os ensinamentos de Jesus"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "It fulfills and confirms His teachings, not replaces them.",
-          "es": "Las cumple y confirma, no las reemplaza.",
-          "pt": "Ela confirma e cumpre os ensinamentos, não os substitui."
-        }
-      },
-      {
-        "text": {
-          "en": "It only symbolizes good ideas, not a real event",
-          "es": "Solo simboliza buenas ideas, no un hecho real",
-          "pt": "Apenas simboliza boas ideias, não um fato real"
-        },
-        "correct": false,
-        "explanation": {
-          "en": "The New Testament proclaims a real, bodily Resurrection witnessed by many.",
-          "es": "El Nuevo Testamento proclama una Resurrección real y corporal, vista por muchos.",
-          "pt": "O Novo Testamento proclama uma Ressurreição real e corporal, testemunhada por muitos."
-        }
-      }
-    ],
-    "tags": [],
-    "source": "1 Corinthians 15:14"
-  }
+        "options": [
+            {
+                "text": {
+                    "en": "An everlasting throne through his descendant",
+                    "es": "Un trono eterno por medio de su descendiente",
+                    "pt": "Um trono eterno por meio de seu descendente",
+                    "sv": "En evig tron genom hans efterkommande"
+                },
+                "correct": true,
+                "explanation": {
+                    "en": "God covenants that David’s dynasty will endure through an heir, fulfilled in Christ (2 Sam 7:12-16).",
+                    "es": "Dios promete que la dinastía de David perdurará en un heredero, cumplido en Cristo (2 Sam 7:12-16).",
+                    "pt": "Deus promete que a dinastia de Davi permanecerá por um herdeiro, cumprida em Cristo (2 Sm 7:12-16).",
+                    "sv": "Gud lovar att Davids dynasti ska bestå genom en arvinge, uppfyllt i Kristus (2 Sam 7:12–16)."
+                }
+            },
+            {
+                "text": {
+                    "en": "Immediate victory over Rome",
+                    "es": "Victoria inmediata sobre Roma",
+                    "pt": "Vitória imediata sobre Roma",
+                    "sv": "Omedelbar seger över Rom"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "Rome is centuries later; the promise was a lasting house, not political timing.",
+                    "es": "Roma es siglos después; la promesa era una casa duradera, no un plazo político.",
+                    "pt": "Roma é séculos depois; a promessa era uma casa duradoura, não um prazo político.",
+                    "sv": "Rom kommer århundraden senare; löftet gällde ett bestående hus, inte politisk tidtabell."
+                }
+            },
+            {
+                "text": {
+                    "en": "That David would build the first temple himself",
+                    "es": "Que David construiría él mismo el primer templo",
+                    "pt": "Que Davi construiria ele mesmo o primeiro templo",
+                    "sv": "Att David själv skulle bygga det första templet"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "God says his son will build it; Solomon fulfills that, not David.",
+                    "es": "Dios dice que su hijo lo construirá; Salomón lo cumple, no David.",
+                    "pt": "Deus diz que seu filho o construirá; Salomão cumpre, não Davi.",
+                    "sv": "Gud säger att hans son ska bygga det; Salomo uppfyller detta, inte David."
+                }
+            },
+            {
+                "text": {
+                    "en": "To end prophecy after David’s reign",
+                    "es": "Terminar la profecía tras el reinado de David",
+                    "pt": "Encerrar a profecia após o reinado de Davi",
+                    "sv": "Att avsluta profetian efter Davids regering"
+                },
+                "correct": false,
+                "explanation": {
+                    "en": "Prophecy continues; the promise is about a perpetual throne.",
+                    "es": "La profecía continúa; la promesa trata de un trono perpetuo.",
+                    "pt": "A profecia continua; a promessa é sobre um trono perpétuo.",
+                    "sv": "Profetian fortsätter; löftet gäller en evig tron."
+                }
+            }
+        ],
+        "tags": [],
+        "source": "2 Samuel 7:12-16"
+    }
 ]

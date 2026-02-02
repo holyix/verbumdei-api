@@ -135,16 +135,16 @@ fn validate_localized(
     text: &crate::resources::questions::model::LocalizedText,
     field: &'static str,
 ) -> Result<(), &'static str> {
-    const REQUIRED: [&str; 3] = ["en", "es", "pt"];
+    const REQUIRED: [&str; 4] = ["en", "es", "pt", "sv"];
     for locale in REQUIRED {
         match text.get(locale) {
             Some(val) if !val.trim().is_empty() => {}
             _ => {
                 return Err(match field {
-                    "prompt" => "prompt requires en, es, and pt",
-                    "stage_label" => "stage_label requires en, es, and pt",
-                    "option text" => "option text requires en, es, and pt",
-                    "option explanation" => "option explanation requires en, es, and pt",
+                    "prompt" => "prompt requires en, es, pt, and sv",
+                    "stage_label" => "stage_label requires en, es, pt, and sv",
+                    "option text" => "option text requires en, es, pt, and sv",
+                    "option explanation" => "option explanation requires en, es, pt, and sv",
                     _ => "all locales must be provided",
                 });
             }
@@ -163,31 +163,37 @@ mod tests {
         stage_label.insert("en".into(), "Stage".into());
         stage_label.insert("es".into(), "Etapa".into());
         stage_label.insert("pt".into(), "Etapa".into());
+        stage_label.insert("sv".into(), "Etapp".into());
 
         let mut prompt = LocalizedText::new();
         prompt.insert("en".into(), "Prompt".into());
         prompt.insert("es".into(), "Pregunta".into());
         prompt.insert("pt".into(), "Pergunta".into());
+        prompt.insert("sv".into(), "Fråga".into());
 
         let mut opt_a = LocalizedText::new();
         opt_a.insert("en".into(), "A".into());
         opt_a.insert("es".into(), "A".into());
         opt_a.insert("pt".into(), "A".into());
+        opt_a.insert("sv".into(), "A".into());
 
         let mut opt_b = LocalizedText::new();
         opt_b.insert("en".into(), "B".into());
         opt_b.insert("es".into(), "B".into());
         opt_b.insert("pt".into(), "B".into());
+        opt_b.insert("sv".into(), "B".into());
 
         let mut opt_c = LocalizedText::new();
         opt_c.insert("en".into(), "C".into());
         opt_c.insert("es".into(), "C".into());
         opt_c.insert("pt".into(), "C".into());
+        opt_c.insert("sv".into(), "C".into());
 
         let mut opt_d = LocalizedText::new();
         opt_d.insert("en".into(), "D".into());
         opt_d.insert("es".into(), "D".into());
         opt_d.insert("pt".into(), "D".into());
+        opt_d.insert("sv".into(), "D".into());
 
         let mut expl_b = LocalizedText::new();
         expl_b.insert("en".into(), "because".into());
@@ -272,6 +278,7 @@ mod tests {
         lt.insert("en".into(), "a".into());
         lt.insert("es".into(), "b".into());
         lt.insert("pt".into(), "c".into());
+        lt.insert("sv".into(), "d".into());
         assert!(validate_localized(&lt, "prompt").is_ok());
         lt.insert("es".into(), "".into());
         assert!(validate_localized(&lt, "prompt").is_err());
