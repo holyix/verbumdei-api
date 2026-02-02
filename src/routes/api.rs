@@ -33,7 +33,6 @@ pub fn router(state: ApiState) -> Router {
         // Config routes
         .route("/v1/ui/locales", ui_handler::get_locales())
         .route("/v1/ui/levels", ui_handler::get_levels())
-        .route("/v1/ui/elements", ui_handler::get_ui())
         // Questions routes
         .route("/v1/questions/:id", question_handler::get().delete(question_handler::delete_question))
         .route("/v1/questions", question_handler::collection())

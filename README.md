@@ -29,7 +29,7 @@ make run-dev
 
 - `GET /health` and `/health/db`
 - `GET /v1/questions`, `GET /v1/questions/:id`, `POST /v1/questions`, `DELETE /v1/questions/:id`
-- `GET /v1/ui/locales`, `GET /v1/ui/levels`, `GET /v1/ui/elements` (frontend pulls locales/levels/text from here)
+- `GET /v1/ui/locales`, `GET /v1/ui/levels` (frontend pulls locales/levels from here)
 
 ## Data utilities
 
