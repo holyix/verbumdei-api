@@ -1,5 +1,5 @@
 use axum::Json;
-use axum::routing::{get as axum_get, MethodRouter};
+use axum::routing::{MethodRouter, get as axum_get};
 
 use super::{levels::levels_config, locales::locales_config};
 

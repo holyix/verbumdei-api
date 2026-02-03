@@ -16,6 +16,16 @@ help: ## Show this help
 lint: ## Run clippy lints
 	@cargo clippy --all-targets --all-features -- -D warnings
 
+fmt: ## Format Rust code
+	@cargo fmt
+
+fmt-check: ## Check Rust formatting
+	@cargo fmt -- --check
+
+check: ## Run lint and format checks
+	@$(MAKE) lint
+	@$(MAKE) fmt-check
+
 build: ## Build the project
 	@cargo build
 
@@ -37,6 +47,6 @@ load-data: ## Load questions from data/questions.json into Mongo
 dump-data: ## Dump questions from Mongo into data/questions.json
 	@MONGO_URI="$(MONGO_URI)" MONGO_DB="$(MONGO_DB)" COLLECTION="$(COLLECTION)" OUT_FILE="$(OUT_FILE)" ./scripts/dump_questions.sh
 
-all: build test lint validate ## Build, test, lint, and validate
+all: build test lint fmt-check validate ## Build, test, lint, format-check, and validate
 
-.PHONY: run build test validate lint load-data dump-data all help
+.PHONY: run build test validate lint fmt fmt-check check load-data dump-data all help

@@ -116,7 +116,10 @@ struct DbGuard {
 
 impl DbGuard {
     fn new(uri: String, name: String) -> Self {
-        Self { uri, name }
+        Self {
+            uri,
+            name,
+        }
     }
 }
 

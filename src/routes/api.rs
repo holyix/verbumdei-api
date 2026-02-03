@@ -11,8 +11,7 @@ use tower_http::{
 };
 
 use crate::resources::{
-    ui::handler as ui_handler, health::handler as health_handler,
-    questions::handler as question_handler,
+    health::handler as health_handler, questions::handler as question_handler, ui::handler as ui_handler,
 };
 
 #[derive(Clone)]
