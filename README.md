@@ -10,7 +10,7 @@ Backend skeleton for the Verbum Dei project.
 - `src/config.rs`: Environment-driven configuration (host, port, Mongo URI/db).
 - `src/resources/health`: Basic health endpoints (`/health`, `/health/db`).
 - `src/resources/questions`: Question model, handlers, queries.
-- `src/resources/ui`: Static UI catalogs (locales, levels, UI text) served from `/v1/ui/*`.
+- `src/resources/ui`: Static UI catalogs (locales, levels) served from `/v1/ui/*`.
 
 ## Running (once Rust is installed)
 
@@ -38,4 +38,7 @@ Make targets wrap the scripts in `scripts/`:
 - `make load-data` — load `data/questions.json` into Mongo
 - `make dump-data` — dump Mongo questions into `data/questions.json`
 - `make validate` — start the API in the background and run the workflow script
+- `make fmt` — format Rust code
+- `make fmt-check` — check Rust formatting
+- `make check` — run lint + format checks
 - `make test|lint|build|all`
