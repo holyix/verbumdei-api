@@ -27,11 +27,44 @@ make run-dev
 
 ## API surface (current)
 
-- `GET /health` and `/health/db`
-- `GET /v1/questions`, `GET /v1/questions/:id`, `POST /v1/questions`, `DELETE /v1/questions/:id`
-- `GET /eras`, `GET /eras/:eraId`, `GET /eras/:eraId/episodes`, `GET /eras/:eraId/episodes/:episodeId`
-- `GET /episodes?book=Genesis`
-- `GET /v1/ui/locales`, `GET /v1/ui/levels` (frontend pulls locales/levels from here)
+- Health: `GET /health`, `GET /health/db`
+- Questions: `GET /v1/questions`, `GET /v1/questions/:id`, `POST /v1/questions`, `DELETE /v1/questions/:id`
+- UI catalogs: `GET /v1/ui/locales`, `GET /v1/ui/levels` (frontend pulls locales/levels from here)
+- Eras + episodes (both unversioned and `/v1/*` aliases are available):
+  - `GET /v1/eras` (`/eras`)
+  - `GET /v1/eras/:eraId` (`/eras/:eraId`)
+  - `GET /v1/eras/:eraId/episodes` (`/eras/:eraId/episodes`)
+  - `GET /v1/eras/:eraId/episodes/:episodeId` (`/eras/:eraId/episodes/:episodeId`)
+  - `GET /v1/episodes?book=Genesis` (`/episodes?book=Genesis`)
+
+## Eras API localization
+
+Eras endpoints support localized content with two inputs:
+
+- Query param: `?lang=<code>`
+- Header: `Accept-Language: <value>`
+
+Supported languages: `en`, `es`, `pt`, `sv`.
+
+Resolution order:
+
+1. `lang` query parameter (highest priority)
+2. First supported language from `Accept-Language`
+3. Fallback to `en`
+
+Notes:
+
+- Regional tags are normalized to base language (`es-MX` -> `es`, `sv-SE` -> `sv`).
+- Unsupported languages (for example `de`) fall back to English.
+
+Examples:
+
+```sh
+curl "http://localhost:3000/v1/eras?lang=es"
+curl -H "Accept-Language: fr-FR, sv-SE;q=0.9, en;q=0.8" \
+  "http://localhost:3000/v1/eras/exodus/episodes/sinai"
+curl "http://localhost:3000/v1/episodes?book=Genesis&lang=pt"
+```
 
 ## Data utilities
 
