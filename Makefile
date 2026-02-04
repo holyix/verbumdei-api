@@ -32,8 +32,15 @@ check: ## Run lint and format checks
 build: ## Build the project
 	@cargo build
 
-test: ## Run tests
-	@cargo test
+test-unit: ## Run unit tests only
+	@cargo test --lib
+
+test-integration: ## Run integration tests only
+	@cargo test --test api_workflow --test eras_api -- --test-threads=1
+
+test: ## Run unit and integration tests
+	@$(MAKE) test-unit
+	@$(MAKE) test-integration
 
 run-dev: ## Run the application in development mode
 	@ENV=local RUST_LOG=debug cargo watch -x run
@@ -62,7 +69,8 @@ dump-data: dump-questions dump-eras ## Dump all collection data from Mongo
 
 all: build test lint fmt-check validate ## Build, test, lint, format-check, and validate
 
-.PHONY: run build test validate lint fmt fmt-check check \
+<<<<<<< HEAD
+.PHONY: run build test test-unit test-integration validate lint fmt fmt-check check \
 	load-questions load-eras load-data \
 	dump-questions dump-eras dump-data \
 	all help
