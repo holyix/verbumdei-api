@@ -6,7 +6,8 @@ on:
   pull_request:
 
 jobs:
-  test:
+  ci:
+    name: Quality Gate (lint, fmt, unit, integration)
     runs-on: ubuntu-latest
     services:
       mongodb:
