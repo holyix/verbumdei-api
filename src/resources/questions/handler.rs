@@ -199,6 +199,7 @@ mod tests {
         expl_b.insert("en".into(), "because".into());
         expl_b.insert("es".into(), "porque".into());
         expl_b.insert("pt".into(), "porque".into());
+        expl_b.insert("sv".into(), "eftersom".into());
 
         CreateQuestion {
             stage: 1,

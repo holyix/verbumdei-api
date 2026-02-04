@@ -150,7 +150,7 @@ fn is_allowed_cross_era_bridge(era_id: &str, episode_id: &str, book: &str) -> bo
 
 #[cfg(test)]
 mod tests {
-    use super::{Era, validate_era_collection};
+    use super::{Era, EraListItem, validate_era_collection};
 
     #[test]
     fn validates_well_formed_fixture() {
@@ -207,5 +207,43 @@ mod tests {
         .expect("fixture should parse");
 
         assert!(validate_era_collection(&eras).is_err());
+    }
+
+    #[test]
+    fn allows_configured_cross_era_bridge_reference() {
+        let eras: Vec<Era> = serde_json::from_str(
+            r#"[
+                {
+                    "_id": "gospel",
+                    "label": "Gospel",
+                    "books": ["Matthew"],
+                    "episodes": [
+                        { "id": "resurrection", "label": "Resurrection", "references": [{"book": "Acts", "chapters": [1]}] }
+                    ]
+                }
+            ]"#,
+        )
+        .expect("fixture should parse");
+
+        assert!(validate_era_collection(&eras).is_ok());
+    }
+
+    #[test]
+    fn era_list_item_counts_episodes() {
+        let era: Era = serde_json::from_str(
+            r#"{
+                "_id": "creation",
+                "label": "Creation",
+                "books": ["Genesis"],
+                "episodes": [
+                    { "id": "world", "label": "World", "references": [] },
+                    { "id": "humanity", "label": "Humanity", "references": [] }
+                ]
+            }"#,
+        )
+        .expect("fixture should parse");
+
+        let list_item = EraListItem::from(era);
+        assert_eq!(list_item.episode_count, 2);
     }
 }

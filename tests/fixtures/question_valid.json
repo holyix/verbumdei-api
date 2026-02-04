@@ -3,34 +3,37 @@
   "prompt": {
     "en": "Sample prompt?",
     "es": "Pregunta de ejemplo?",
-    "pt": "Pergunta de exemplo?"
+    "pt": "Pergunta de exemplo?",
+    "sv": "Exempelfråga?"
   },
   "options": [
     {
-      "text": { "en": "Yes", "es": "Sí", "pt": "Sim" },
+      "text": { "en": "Yes", "es": "Sí", "pt": "Sim", "sv": "Ja" },
       "correct": true,
       "explanation": {
         "en": "Because ...",
         "es": "Porque ...",
-        "pt": "Porque ..."
+        "pt": "Porque ...",
+        "sv": "Eftersom ..."
       }
     },
     {
-      "text": { "en": "No", "es": "No", "pt": "Não" },
+      "text": { "en": "No", "es": "No", "pt": "Não", "sv": "Nej" },
       "correct": false,
       "explanation": {
         "en": "Because ...",
         "es": "Porque ...",
-        "pt": "Porque ..."
+        "pt": "Porque ...",
+        "sv": "Eftersom ..."
       }
     },
     {
-      "text": { "en": "Maybe", "es": "Tal vez", "pt": "Talvez" },
+      "text": { "en": "Maybe", "es": "Tal vez", "pt": "Talvez", "sv": "Kanske" },
       "correct": false,
       "explanation": null
     },
     {
-      "text": { "en": "Later", "es": "Luego", "pt": "Depois" },
+      "text": { "en": "Later", "es": "Luego", "pt": "Depois", "sv": "Senare" },
       "correct": false,
       "explanation": null
     }
