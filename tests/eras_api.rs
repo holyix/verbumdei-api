@@ -17,11 +17,13 @@ async fn eras_endpoints_return_seeded_data() -> Result<(), Box<dyn std::error::E
     assert_eq!(eras_res.status(), StatusCode::OK);
     let eras = eras_res.json::<Vec<serde_json::Value>>().await?;
     assert_eq!(eras.len(), 2);
+    assert_eq!(eras[0].get("name").and_then(|v| v.as_str()), Some("Creation"));
 
     let era_res = test_app.client.get(format!("{}/v1/eras/creation", test_app.base)).send().await?;
     assert_eq!(era_res.status(), StatusCode::OK);
     let era = era_res.json::<serde_json::Value>().await?;
     assert_eq!(era.get("id").and_then(|v| v.as_str()), Some("creation"));
+    assert_eq!(era.get("name").and_then(|v| v.as_str()), Some("Creation"));
 
     let episodes_res =
         test_app.client.get(format!("{}/v1/eras/creation/episodes", test_app.base)).send().await?;
@@ -29,6 +31,44 @@ async fn eras_endpoints_return_seeded_data() -> Result<(), Box<dyn std::error::E
     let episodes = episodes_res.json::<Vec<serde_json::Value>>().await?;
     assert_eq!(episodes.len(), 1);
     assert_eq!(episodes[0].get("id").and_then(|v| v.as_str()), Some("world"));
+    assert_eq!(episodes[0].get("name").and_then(|v| v.as_str()), Some("World"));
+
+    Ok(())
+}
+
+#[tokio::test]
+async fn eras_endpoints_resolve_lang_from_query_and_header() -> Result<(), Box<dyn std::error::Error>> {
+    let test_app = TestApp::spawn().await?;
+
+    let es_res = test_app.client.get(format!("{}/v1/eras?lang=es", test_app.base)).send().await?;
+    assert_eq!(es_res.status(), StatusCode::OK);
+    let eras = es_res.json::<Vec<serde_json::Value>>().await?;
+    assert_eq!(eras[0].get("name").and_then(|v| v.as_str()), Some("Creación"));
+
+    let sv_res = test_app
+        .client
+        .get(format!("{}/v1/eras/exodus/episodes/sinai", test_app.base))
+        .header("Accept-Language", "fr-FR, sv-SE;q=0.9, en;q=0.8")
+        .send()
+        .await?;
+    assert_eq!(sv_res.status(), StatusCode::OK);
+    let episode = sv_res.json::<serde_json::Value>().await?;
+    assert_eq!(episode.get("name").and_then(|v| v.as_str()), Some("Sinai"));
+    assert_eq!(
+        episode
+            .get("references")
+            .and_then(|refs| refs.as_array())
+            .and_then(|refs| refs.first())
+            .and_then(|r| r.get("book"))
+            .and_then(|v| v.as_str()),
+        Some("Andra Mosebok")
+    );
+
+    let fallback_res =
+        test_app.client.get(format!("{}/v1/eras/exodus?lang=de", test_app.base)).send().await?;
+    assert_eq!(fallback_res.status(), StatusCode::OK);
+    let era = fallback_res.json::<serde_json::Value>().await?;
+    assert_eq!(era.get("name").and_then(|v| v.as_str()), Some("Exodus"));
 
     Ok(())
 }
@@ -126,27 +166,145 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
     let docs: Vec<Document> = vec![
         doc! {
             "_id": "creation",
-            "label": "Creation",
-            "books": ["Genesis"],
-            "episodes": [
-                {
-                    "id": "world",
-                    "label": "Creation of the World",
-                    "references": [{"book": "Genesis", "chapters": [1]}]
-                }
-            ]
+            "en": {
+                "id": "creation",
+                "name": "Creation",
+                "label": "Creation",
+                "books": ["Genesis"],
+                "episodes": [
+                    {
+                        "id": "world",
+                        "name": "World",
+                        "label": "Creation of the World",
+                        "references": [{"book_id": "Genesis", "book": "Genesis", "chapters": [1]}]
+                    }
+                ]
+            },
+            "es": {
+                "id": "creation",
+                "name": "Creación",
+                "label": "Creación",
+                "books": ["Génesis"],
+                "episodes": [
+                    {
+                        "id": "world",
+                        "name": "Mundo",
+                        "label": "Creación del Mundo",
+                        "references": [{"book_id": "Genesis", "book": "Génesis", "chapters": [1]}]
+                    }
+                ]
+            },
+            "pt": {
+                "id": "creation",
+                "name": "Criação",
+                "label": "Criação",
+                "books": ["Gênesis"],
+                "episodes": [
+                    {
+                        "id": "world",
+                        "name": "Mundo",
+                        "label": "Criação do Mundo",
+                        "references": [{"book_id": "Genesis", "book": "Gênesis", "chapters": [1]}]
+                    }
+                ]
+            },
+            "sv": {
+                "id": "creation",
+                "name": "Skapelsen",
+                "label": "Skapelsen",
+                "books": ["Första Mosebok"],
+                "episodes": [
+                    {
+                        "id": "world",
+                        "name": "Världen",
+                        "label": "Världens skapelse",
+                        "references": [{"book_id": "Genesis", "book": "Första Mosebok", "chapters": [1]}]
+                    }
+                ]
+            }
         },
         doc! {
             "_id": "exodus",
-            "label": "Exodus",
-            "books": ["Exodus"],
-            "episodes": [
-                {
-                    "id": "moses",
-                    "label": "Moses",
-                    "references": [{"book": "Exodus", "chapters": [3]}]
-                }
-            ]
+            "en": {
+                "id": "exodus",
+                "name": "Exodus",
+                "label": "Exodus and Sinai Covenant",
+                "books": ["Exodus"],
+                "episodes": [
+                    {
+                        "id": "moses",
+                        "name": "Moses",
+                        "label": "Moses and His Calling",
+                        "references": [{"book_id": "Exodus", "book": "Exodus", "chapters": [3]}]
+                    },
+                    {
+                        "id": "sinai",
+                        "name": "Sinai",
+                        "label": "The Sinai Covenant",
+                        "references": [{"book_id": "Exodus", "book": "Exodus", "chapters": [19,20]}]
+                    }
+                ]
+            },
+            "es": {
+                "id": "exodus",
+                "name": "Éxodo",
+                "label": "Éxodo y la Alianza del Sinaí",
+                "books": ["Éxodo"],
+                "episodes": [
+                    {
+                        "id": "moses",
+                        "name": "Moisés",
+                        "label": "Moisés y su Llamado",
+                        "references": [{"book_id": "Exodus", "book": "Éxodo", "chapters": [3]}]
+                    },
+                    {
+                        "id": "sinai",
+                        "name": "Sinaí",
+                        "label": "La Alianza en el Sinaí",
+                        "references": [{"book_id": "Exodus", "book": "Éxodo", "chapters": [19,20]}]
+                    }
+                ]
+            },
+            "pt": {
+                "id": "exodus",
+                "name": "Êxodo",
+                "label": "Êxodo e a Aliança do Sinai",
+                "books": ["Êxodo"],
+                "episodes": [
+                    {
+                        "id": "moses",
+                        "name": "Moisés",
+                        "label": "Moisés e seu Chamado",
+                        "references": [{"book_id": "Exodus", "book": "Êxodo", "chapters": [3]}]
+                    },
+                    {
+                        "id": "sinai",
+                        "name": "Sinai",
+                        "label": "A Aliança no Sinai",
+                        "references": [{"book_id": "Exodus", "book": "Êxodo", "chapters": [19,20]}]
+                    }
+                ]
+            },
+            "sv": {
+                "id": "exodus",
+                "name": "Exodus",
+                "label": "Uttåget och Sinai-förbundet",
+                "books": ["Andra Mosebok"],
+                "episodes": [
+                    {
+                        "id": "moses",
+                        "name": "Mose",
+                        "label": "Mose och hans kallelse",
+                        "references": [{"book_id": "Exodus", "book": "Andra Mosebok", "chapters": [3]}]
+                    },
+                    {
+                        "id": "sinai",
+                        "name": "Sinai",
+                        "label": "Förbundet vid Sinai",
+                        "references": [{"book_id": "Exodus", "book": "Andra Mosebok", "chapters": [19,20]}]
+                    }
+                ]
+            }
         },
     ];
 
