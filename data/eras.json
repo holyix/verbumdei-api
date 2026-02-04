@@ -1,0 +1,941 @@
+[
+    {
+        "_id": "creation",
+        "label": "Creation",
+        "books": [
+            "Genesis"
+        ],
+        "episodes": [
+            {
+                "id": "world",
+                "label": "Creation of the World",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "humanity",
+                "label": "Creation of Humanity",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            1,
+                            2
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "prophets",
+        "label": "The Prophets and the Divided Kingdom",
+        "books": [
+            "Isaiah",
+            "Jeremiah",
+            "Lamentations",
+            "Baruch",
+            "Ezekiel",
+            "Daniel",
+            "Hosea",
+            "Joel",
+            "Amos",
+            "Obadiah",
+            "Jonah",
+            "Micah",
+            "Nahum",
+            "Habakkuk",
+            "Zephaniah",
+            "Haggai",
+            "Zechariah",
+            "Malachi"
+        ],
+        "episodes": [
+            {
+                "id": "division",
+                "label": "The Divided Kingdom",
+                "references": [
+                    {
+                        "book": "1 Kings",
+                        "chapters": [
+                            12
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "commission",
+                "label": "The Prophetic Commission",
+                "references": [
+                    {
+                        "book": "Isaiah",
+                        "chapters": [
+                            6
+                        ]
+                    },
+                    {
+                        "book": "Jeremiah",
+                        "chapters": [
+                            1
+                        ]
+                    },
+                    {
+                        "book": "Ezekiel",
+                        "chapters": [
+                            1,
+                            2
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "repentance",
+                "label": "Calls to Repentance",
+                "references": [
+                    {
+                        "book": "Isaiah",
+                        "chapters": [
+                            1
+                        ]
+                    },
+                    {
+                        "book": "Micah",
+                        "chapters": [
+                            6
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "exodus",
+        "label": "Exodus and the Sinai Covenant",
+        "books": [
+            "Exodus",
+            "Leviticus",
+            "Numbers",
+            "Deuteronomy"
+        ],
+        "episodes": [
+            {
+                "id": "moses",
+                "label": "Moses and His Calling",
+                "references": [
+                    {
+                        "book": "Exodus",
+                        "chapters": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "exodus-event",
+                "label": "The Exodus",
+                "references": [
+                    {
+                        "book": "Exodus",
+                        "chapters": [
+                            5,
+                            12,
+                            14,
+                            15
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "sinai",
+                "label": "The Covenant at Sinai",
+                "references": [
+                    {
+                        "book": "Exodus",
+                        "chapters": [
+                            19,
+                            20,
+                            24,
+                            32,
+                            34
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "wilderness",
+                "label": "The Wilderness Journey",
+                "references": [
+                    {
+                        "book": "Numbers",
+                        "chapters": [
+                            10,
+                            14,
+                            20,
+                            21
+                        ]
+                    },
+                    {
+                        "book": "Deuteronomy",
+                        "chapters": [
+                            1,
+                            6
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "origins",
+        "label": "Fall and the Early World",
+        "books": [
+            "Genesis"
+        ],
+        "episodes": [
+            {
+                "id": "the-fall",
+                "label": "The Fall",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            3
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "cain-abel",
+                "label": "Cain and Abel",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            4
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "noah",
+                "label": "Noah and the Flood",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            6,
+                            7,
+                            8,
+                            9
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "babel",
+                "label": "The Tower of Babel",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            11
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "settlement",
+        "label": "Conquest of the Promised Land",
+        "books": [
+            "Joshua",
+            "Judges",
+            "Ruth"
+        ],
+        "episodes": [
+            {
+                "id": "joshua",
+                "label": "Joshua and the Conquest",
+                "references": [
+                    {
+                        "book": "Joshua",
+                        "chapters": [
+                            1,
+                            6,
+                            24
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "judges",
+                "label": "The Judges",
+                "references": [
+                    {
+                        "book": "Judges",
+                        "chapters": [
+                            2,
+                            6,
+                            13
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "messianics",
+        "label": "Messianic Prophecies",
+        "type": "meta",
+        "books": [],
+        "episodes": []
+    },
+    {
+        "_id": "patriarchs",
+        "label": "The Patriarchs",
+        "books": [
+            "Genesis"
+        ],
+        "episodes": [
+            {
+                "id": "abraham",
+                "label": "Abraham and the Covenant",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            12,
+                            15,
+                            17,
+                            22
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "isaac",
+                "label": "Isaac",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            21,
+                            26
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "jacob",
+                "label": "Jacob and the Twelve Tribes",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            27,
+                            28,
+                            32,
+                            35
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "joseph",
+                "label": "Joseph in Egypt",
+                "references": [
+                    {
+                        "book": "Genesis",
+                        "chapters": [
+                            37,
+                            41,
+                            45,
+                            50
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "kings",
+        "label": "The Kings of Israel",
+        "books": [
+            "1 Samuel",
+            "2 Samuel",
+            "1 Kings",
+            "2 Kings",
+            "1 Chronicles",
+            "2 Chronicles"
+        ],
+        "episodes": [
+            {
+                "id": "saul",
+                "label": "Saul, the First King",
+                "references": [
+                    {
+                        "book": "1 Samuel",
+                        "chapters": [
+                            9,
+                            10,
+                            15
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "david",
+                "label": "David, King and Covenant",
+                "references": [
+                    {
+                        "book": "1 Samuel",
+                        "chapters": [
+                            16,
+                            17
+                        ]
+                    },
+                    {
+                        "book": "2 Samuel",
+                        "chapters": [
+                            5,
+                            7
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "solomon",
+                "label": "Solomon and the Temple",
+                "references": [
+                    {
+                        "book": "1 Kings",
+                        "chapters": [
+                            3,
+                            6,
+                            8,
+                            11
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "church",
+        "label": "The Apostolic Church",
+        "books": [
+            "Acts",
+            "Romans",
+            "1 Corinthians",
+            "2 Corinthians",
+            "Galatians",
+            "Ephesians",
+            "Philippians",
+            "Colossians",
+            "1 Thessalonians",
+            "2 Thessalonians",
+            "1 Timothy",
+            "2 Timothy",
+            "Titus",
+            "Philemon",
+            "Hebrews",
+            "James",
+            "1 Peter",
+            "2 Peter",
+            "1 John",
+            "2 John",
+            "3 John",
+            "Jude",
+            "Revelation"
+        ],
+        "episodes": [
+            {
+                "id": "pentecost",
+                "label": "Pentecost and the Birth of the Church",
+                "references": [
+                    {
+                        "book": "Acts",
+                        "chapters": [
+                            2
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "apostles",
+                "label": "The Apostolic Mission",
+                "references": [
+                    {
+                        "book": "Acts",
+                        "chapters": [
+                            3,
+                            4,
+                            5,
+                            8
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "paul",
+                "label": "Paul and the Mission to the Gentiles",
+                "references": [
+                    {
+                        "book": "Acts",
+                        "chapters": [
+                            9,
+                            13,
+                            15,
+                            17,
+                            20
+                        ]
+                    },
+                    {
+                        "book": "Romans",
+                        "chapters": [
+                            1,
+                            8
+                        ]
+                    },
+                    {
+                        "book": "Galatians",
+                        "chapters": [
+                            2,
+                            3
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "letters",
+                "label": "The Apostolic Letters",
+                "references": [
+                    {
+                        "book": "1 Corinthians",
+                        "chapters": [
+                            12,
+                            13
+                        ]
+                    },
+                    {
+                        "book": "Ephesians",
+                        "chapters": [
+                            2,
+                            6
+                        ]
+                    },
+                    {
+                        "book": "James",
+                        "chapters": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "book": "1 Peter",
+                        "chapters": [
+                            1,
+                            2
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "revelation",
+                "label": "Revelation and Christian Hope",
+                "references": [
+                    {
+                        "book": "Revelation",
+                        "chapters": [
+                            1,
+                            5,
+                            21,
+                            22
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "wisdom",
+        "label": "Wisdom Literature",
+        "books": [
+            "Job",
+            "Proverbs",
+            "Ecclesiastes",
+            "Song of Songs",
+            "Wisdom",
+            "Sirach"
+        ],
+        "episodes": [
+            {
+                "id": "suffering",
+                "label": "Suffering and Justice",
+                "references": [
+                    {
+                        "book": "Job",
+                        "chapters": [
+                            1,
+                            2,
+                            38
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "virtue",
+                "label": "Virtue and Right Living",
+                "references": [
+                    {
+                        "book": "Proverbs",
+                        "chapters": [
+                            1,
+                            3
+                        ]
+                    },
+                    {
+                        "book": "Sirach",
+                        "chapters": [
+                            2,
+                            15
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "meaning",
+                "label": "The Search for Meaning",
+                "references": [
+                    {
+                        "book": "Ecclesiastes",
+                        "chapters": [
+                            1,
+                            3,
+                            12
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "exile",
+        "label": "Exile and Restoration",
+        "books": [
+            "2 Kings",
+            "Ezra",
+            "Nehemiah",
+            "Tobit",
+            "Judith",
+            "Esther",
+            "1 Maccabees",
+            "2 Maccabees"
+        ],
+        "episodes": [
+            {
+                "id": "exile",
+                "label": "Fall and Life in Exile",
+                "references": [
+                    {
+                        "book": "2 Kings",
+                        "chapters": [
+                            24,
+                            25
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "daniel",
+                "label": "Daniel in Exile",
+                "references": [
+                    {
+                        "book": "Daniel",
+                        "chapters": [
+                            1,
+                            3,
+                            6,
+                            7
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "esther",
+                "label": "Esther and Deliverance",
+                "references": [
+                    {
+                        "book": "Esther",
+                        "chapters": [
+                            4,
+                            7,
+                            9
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "return",
+                "label": "Return and Restoration",
+                "references": [
+                    {
+                        "book": "Ezra",
+                        "chapters": [
+                            1,
+                            3
+                        ]
+                    },
+                    {
+                        "book": "Nehemiah",
+                        "chapters": [
+                            2,
+                            8
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "maccabees",
+                "label": "Resistance and Martyrdom",
+                "references": [
+                    {
+                        "book": "2 Maccabees",
+                        "chapters": [
+                            7
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "gospel",
+        "label": "The Gospel",
+        "books": [
+            "Matthew",
+            "Mark",
+            "Luke",
+            "John"
+        ],
+        "episodes": [
+            {
+                "id": "incarnation",
+                "label": "The Incarnation",
+                "references": [
+                    {
+                        "book": "Matthew",
+                        "chapters": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "book": "Luke",
+                        "chapters": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "book": "John",
+                        "chapters": [
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "mary",
+                "label": "Mary, Mother of the Messiah",
+                "references": [
+                    {
+                        "book": "Luke",
+                        "chapters": [
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "book": "John",
+                        "chapters": [
+                            2,
+                            19
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "ministry",
+                "label": "The Public Ministry of Jesus",
+                "references": [
+                    {
+                        "book": "Matthew",
+                        "chapters": [
+                            3,
+                            5,
+                            13,
+                            16
+                        ]
+                    },
+                    {
+                        "book": "Mark",
+                        "chapters": [
+                            1,
+                            4,
+                            8
+                        ]
+                    },
+                    {
+                        "book": "Luke",
+                        "chapters": [
+                            4,
+                            6,
+                            9
+                        ]
+                    },
+                    {
+                        "book": "John",
+                        "chapters": [
+                            3,
+                            6,
+                            10
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "passion",
+                "label": "The Passion of Christ",
+                "references": [
+                    {
+                        "book": "Matthew",
+                        "chapters": [
+                            26,
+                            27
+                        ]
+                    },
+                    {
+                        "book": "Mark",
+                        "chapters": [
+                            14,
+                            15
+                        ]
+                    },
+                    {
+                        "book": "Luke",
+                        "chapters": [
+                            22,
+                            23
+                        ]
+                    },
+                    {
+                        "book": "John",
+                        "chapters": [
+                            18,
+                            19
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "resurrection",
+                "label": "Resurrection and Ascension",
+                "references": [
+                    {
+                        "book": "Matthew",
+                        "chapters": [
+                            28
+                        ]
+                    },
+                    {
+                        "book": "Mark",
+                        "chapters": [
+                            16
+                        ]
+                    },
+                    {
+                        "book": "Luke",
+                        "chapters": [
+                            24
+                        ]
+                    },
+                    {
+                        "book": "John",
+                        "chapters": [
+                            20,
+                            21
+                        ]
+                    },
+                    {
+                        "book": "Acts",
+                        "chapters": [
+                            1
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "_id": "psalms",
+        "label": "The Psalms",
+        "books": [
+            "Psalms"
+        ],
+        "episodes": [
+            {
+                "id": "lament",
+                "label": "Psalms of Lament",
+                "references": [
+                    {
+                        "book": "Psalms",
+                        "chapters": [
+                            22,
+                            42,
+                            51
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "praise",
+                "label": "Psalms of Praise",
+                "references": [
+                    {
+                        "book": "Psalms",
+                        "chapters": [
+                            8,
+                            100,
+                            150
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "kingship",
+                "label": "Royal and Messianic Psalms",
+                "references": [
+                    {
+                        "book": "Psalms",
+                        "chapters": [
+                            2,
+                            72,
+                            110
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

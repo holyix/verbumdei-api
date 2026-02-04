@@ -11,7 +11,8 @@ use tower_http::{
 };
 
 use crate::resources::{
-    health::handler as health_handler, questions::handler as question_handler, ui::handler as ui_handler,
+    eras::handler as era_handler, health::handler as health_handler,
+    questions::handler as question_handler, ui::handler as ui_handler,
 };
 
 #[derive(Clone)]
@@ -35,6 +36,18 @@ pub fn router(state: ApiState) -> Router {
         // Questions routes
         .route("/v1/questions/:id", question_handler::get().delete(question_handler::delete_question))
         .route("/v1/questions", question_handler::collection())
+        // Eras routes
+        .route("/eras", era_handler::collection())
+        .route("/eras/:era_id", era_handler::era())
+        .route("/eras/:era_id/episodes", era_handler::episodes_collection())
+        .route("/eras/:era_id/episodes/:episode_id", era_handler::episode())
+        .route("/episodes", era_handler::episodes_search())
+        // Versioned aliases for eras routes
+        .route("/v1/eras", era_handler::collection())
+        .route("/v1/eras/:era_id", era_handler::era())
+        .route("/v1/eras/:era_id/episodes", era_handler::episodes_collection())
+        .route("/v1/eras/:era_id/episodes/:episode_id", era_handler::episode())
+        .route("/v1/episodes", era_handler::episodes_search())
         .layer(cors)
         .layer(TraceLayer::new_for_http())
         .fallback(fallback_invalid_path)
