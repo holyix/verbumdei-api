@@ -69,7 +69,6 @@ dump-data: dump-questions dump-eras ## Dump all collection data from Mongo
 
 all: build test lint fmt-check validate ## Build, test, lint, format-check, and validate
 
-<<<<<<< HEAD
 .PHONY: run build test test-unit test-integration validate lint fmt fmt-check check \
 	load-questions load-eras load-data \
 	dump-questions dump-eras dump-data \
