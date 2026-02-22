@@ -23,10 +23,13 @@ pub async fn list_eras(db: &Database, lang: &str) -> mongodb::error::Result<Vec<
     let mut projection = doc! {"_id": 1, "type": 1};
     projection.insert(format!("{lang}.name"), 1);
     projection.insert(format!("{lang}.label"), 1);
+    projection.insert(format!("{lang}.order"), 1);
     projection.insert(format!("{lang}.episodes"), 1);
 
-    let options =
-        mongodb::options::FindOptions::builder().projection(projection).sort(doc! {"_id": 1}).build();
+    let options = mongodb::options::FindOptions::builder()
+        .projection(projection)
+        .sort(doc! {format!("{lang}.order"): 1, "_id": 1})
+        .build();
     let mut cursor = eras_collection(db).find(doc! {}, options).await?;
 
     let mut eras = Vec::new();
@@ -34,6 +37,7 @@ pub async fn list_eras(db: &Database, lang: &str) -> mongodb::error::Result<Vec<
         eras.push(parse_era_list_item(era, lang));
     }
 
+    sort_eras(&mut eras);
     Ok(eras)
 }
 
@@ -92,6 +96,7 @@ fn parse_era_list_item(doc: Document, lang: &str) -> EraListItem {
         id: get_string(&doc, "_id"),
         name: locale.and_then(|d| get_string_opt(d, "name")).unwrap_or_default(),
         label: locale.and_then(|d| get_string_opt(d, "label")).unwrap_or_default(),
+        order: locale.and_then(|d| get_i32_opt(d, "order")).unwrap_or(i32::MAX),
         era_type: get_optional_string(&doc, "type"),
         episode_count: episodes.len(),
     }
@@ -214,6 +219,7 @@ fn parse_era(doc: Document, lang: &str) -> EraDto {
         id: get_string(&doc, "_id"),
         name: locale.and_then(|d| get_string_opt(d, "name")).unwrap_or_default(),
         label: locale.and_then(|d| get_string_opt(d, "label")).unwrap_or_default(),
+        order: locale.and_then(|d| get_i32_opt(d, "order")).unwrap_or(i32::MAX),
         era_type: get_optional_string(&doc, "type"),
         books,
         episodes,
@@ -227,6 +233,7 @@ fn parse_episode_list(doc: Document, lang: &str) -> Vec<EpisodeListItem> {
             id: episode.id,
             name: episode.name,
             label: episode.label,
+            order: episode.order,
             reference_count: episode.references.len(),
         })
         .collect()
@@ -240,15 +247,19 @@ fn episodes_for_lang(doc: &Document, lang: &str) -> Vec<EpisodeDto> {
         return Vec::new();
     };
 
-    episodes
+    let mut parsed = episodes
         .into_iter()
         .map(|episode| EpisodeDto {
             id: get_string(&episode, "id"),
             name: get_string(&episode, "name"),
             label: get_string(&episode, "label"),
+            order: get_i32_opt(&episode, "order").unwrap_or(i32::MAX),
             references: parse_references(&episode),
         })
-        .collect()
+        .collect::<Vec<_>>();
+
+    parsed.sort_by(|a, b| a.order.cmp(&b.order).then_with(|| a.id.cmp(&b.id)));
+    parsed
 }
 
 fn parse_references(episode: &Document) -> Vec<Reference> {
@@ -279,4 +290,30 @@ fn parse_references(episode: &Document) -> Vec<Reference> {
                 .unwrap_or_default(),
         })
         .collect()
+}
+
+fn get_i32_opt(doc: &Document, key: &str) -> Option<i32> {
+    match doc.get(key) {
+        Some(Bson::Int32(value)) => Some(*value),
+        Some(Bson::Int64(value)) => i32::try_from(*value).ok(),
+        Some(Bson::Double(value)) => {
+            if value.is_finite() {
+                Some(*value as i32)
+            } else {
+                None
+            }
+        }
+        _ => None,
+    }
+}
+
+fn sort_eras(eras: &mut [EraListItem]) {
+    eras.sort_by(|a, b| {
+        let a_is_meta = a.era_type.as_deref() == Some("meta");
+        let b_is_meta = b.era_type.as_deref() == Some("meta");
+        a_is_meta
+            .cmp(&b_is_meta)
+            .then_with(|| a.order.cmp(&b.order))
+            .then_with(|| a.id.cmp(&b.id))
+    });
 }

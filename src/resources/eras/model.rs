@@ -12,6 +12,7 @@ pub struct EraListItem {
     pub id: String,
     pub name: String,
     pub label: String,
+    pub order: i32,
     #[serde(rename = "type")]
     pub era_type: Option<String>,
     pub episode_count: usize,
@@ -22,6 +23,7 @@ pub struct EraDto {
     pub id: String,
     pub name: String,
     pub label: String,
+    pub order: i32,
     #[serde(rename = "type")]
     pub era_type: Option<String>,
     pub books: Vec<String>,
@@ -33,6 +35,7 @@ pub struct EpisodeListItem {
     pub id: String,
     pub name: String,
     pub label: String,
+    pub order: i32,
     pub reference_count: usize,
 }
 
@@ -41,6 +44,7 @@ pub struct EpisodeDto {
     pub id: String,
     pub name: String,
     pub label: String,
+    pub order: i32,
     pub references: Vec<Reference>,
 }
 

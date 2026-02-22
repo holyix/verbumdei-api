@@ -18,6 +18,7 @@ async fn eras_endpoints_return_seeded_data() -> Result<(), Box<dyn std::error::E
     let eras = eras_res.json::<Vec<serde_json::Value>>().await?;
     assert_eq!(eras.len(), 2);
     assert_eq!(eras[0].get("name").and_then(|v| v.as_str()), Some("Creation"));
+    assert_eq!(eras[0].get("order").and_then(|v| v.as_i64()), Some(10));
 
     let era_res = test_app.client.get(format!("{}/v1/eras/creation", test_app.base)).send().await?;
     assert_eq!(era_res.status(), StatusCode::OK);
@@ -32,6 +33,7 @@ async fn eras_endpoints_return_seeded_data() -> Result<(), Box<dyn std::error::E
     assert_eq!(episodes.len(), 1);
     assert_eq!(episodes[0].get("id").and_then(|v| v.as_str()), Some("world"));
     assert_eq!(episodes[0].get("name").and_then(|v| v.as_str()), Some("World"));
+    assert_eq!(episodes[0].get("order").and_then(|v| v.as_i64()), Some(10));
 
     Ok(())
 }
@@ -170,12 +172,14 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "creation",
                 "name": "Creation",
                 "label": "Creation",
+                "order": 10,
                 "books": ["Genesis"],
                 "episodes": [
                     {
                         "id": "world",
                         "name": "World",
                         "label": "Creation of the World",
+                        "order": 10,
                         "references": [{"book_id": "Genesis", "book": "Genesis", "chapters": [1]}]
                     }
                 ]
@@ -184,12 +188,14 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "creation",
                 "name": "Creación",
                 "label": "Creación",
+                "order": 10,
                 "books": ["Génesis"],
                 "episodes": [
                     {
                         "id": "world",
                         "name": "Mundo",
                         "label": "Creación del Mundo",
+                        "order": 10,
                         "references": [{"book_id": "Genesis", "book": "Génesis", "chapters": [1]}]
                     }
                 ]
@@ -198,12 +204,14 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "creation",
                 "name": "Criação",
                 "label": "Criação",
+                "order": 10,
                 "books": ["Gênesis"],
                 "episodes": [
                     {
                         "id": "world",
                         "name": "Mundo",
                         "label": "Criação do Mundo",
+                        "order": 10,
                         "references": [{"book_id": "Genesis", "book": "Gênesis", "chapters": [1]}]
                     }
                 ]
@@ -212,12 +220,14 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "creation",
                 "name": "Skapelsen",
                 "label": "Skapelsen",
+                "order": 10,
                 "books": ["Första Mosebok"],
                 "episodes": [
                     {
                         "id": "world",
                         "name": "Världen",
                         "label": "Världens skapelse",
+                        "order": 10,
                         "references": [{"book_id": "Genesis", "book": "Första Mosebok", "chapters": [1]}]
                     }
                 ]
@@ -229,18 +239,21 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "exodus",
                 "name": "Exodus",
                 "label": "Exodus and Sinai Covenant",
+                "order": 20,
                 "books": ["Exodus"],
                 "episodes": [
                     {
                         "id": "moses",
                         "name": "Moses",
                         "label": "Moses and His Calling",
+                        "order": 10,
                         "references": [{"book_id": "Exodus", "book": "Exodus", "chapters": [3]}]
                     },
                     {
                         "id": "sinai",
                         "name": "Sinai",
                         "label": "The Sinai Covenant",
+                        "order": 20,
                         "references": [{"book_id": "Exodus", "book": "Exodus", "chapters": [19,20]}]
                     }
                 ]
@@ -249,18 +262,21 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "exodus",
                 "name": "Éxodo",
                 "label": "Éxodo y la Alianza del Sinaí",
+                "order": 20,
                 "books": ["Éxodo"],
                 "episodes": [
                     {
                         "id": "moses",
                         "name": "Moisés",
                         "label": "Moisés y su Llamado",
+                        "order": 10,
                         "references": [{"book_id": "Exodus", "book": "Éxodo", "chapters": [3]}]
                     },
                     {
                         "id": "sinai",
                         "name": "Sinaí",
                         "label": "La Alianza en el Sinaí",
+                        "order": 20,
                         "references": [{"book_id": "Exodus", "book": "Éxodo", "chapters": [19,20]}]
                     }
                 ]
@@ -269,18 +285,21 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "exodus",
                 "name": "Êxodo",
                 "label": "Êxodo e a Aliança do Sinai",
+                "order": 20,
                 "books": ["Êxodo"],
                 "episodes": [
                     {
                         "id": "moses",
                         "name": "Moisés",
                         "label": "Moisés e seu Chamado",
+                        "order": 10,
                         "references": [{"book_id": "Exodus", "book": "Êxodo", "chapters": [3]}]
                     },
                     {
                         "id": "sinai",
                         "name": "Sinai",
                         "label": "A Aliança no Sinai",
+                        "order": 20,
                         "references": [{"book_id": "Exodus", "book": "Êxodo", "chapters": [19,20]}]
                     }
                 ]
@@ -289,18 +308,21 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "exodus",
                 "name": "Exodus",
                 "label": "Uttåget och Sinai-förbundet",
+                "order": 20,
                 "books": ["Andra Mosebok"],
                 "episodes": [
                     {
                         "id": "moses",
                         "name": "Mose",
                         "label": "Mose och hans kallelse",
+                        "order": 10,
                         "references": [{"book_id": "Exodus", "book": "Andra Mosebok", "chapters": [3]}]
                     },
                     {
                         "id": "sinai",
                         "name": "Sinai",
                         "label": "Förbundet vid Sinai",
+                        "order": 20,
                         "references": [{"book_id": "Exodus", "book": "Andra Mosebok", "chapters": [19,20]}]
                     }
                 ]
