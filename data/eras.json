@@ -1893,7 +1893,7 @@
         }
       ],
       "order": 60,
-      "image_path": "/illustrations/quest-hero.svg"
+      "image_path": "/illustrations/question-david-goliath.svg"
     },
     "es": {
       "id": "kings",
@@ -1969,7 +1969,7 @@
         }
       ],
       "order": 60,
-      "image_path": "/illustrations/quest-hero.svg"
+      "image_path": "/illustrations/question-david-goliath.svg"
     },
     "pt": {
       "id": "kings",
@@ -2045,7 +2045,7 @@
         }
       ],
       "order": 60,
-      "image_path": "/illustrations/quest-hero.svg"
+      "image_path": "/illustrations/question-david-goliath.svg"
     },
     "sv": {
       "id": "kings",
@@ -2121,7 +2121,7 @@
         }
       ],
       "order": 60,
-      "image_path": "/illustrations/quest-hero.svg"
+      "image_path": "/illustrations/question-david-goliath.svg"
     }
   },
   {
