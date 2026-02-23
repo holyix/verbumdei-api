@@ -4371,7 +4371,7 @@
         }
       ],
       "order": 70,
-      "image_path": "/illustrations/quest-hero.svg"
+      "image_path": "/illustrations/question-psalms.svg"
     },
     "es": {
       "id": "psalms",
@@ -4434,7 +4434,7 @@
         }
       ],
       "order": 70,
-      "image_path": "/illustrations/quest-hero.svg"
+      "image_path": "/illustrations/question-psalms.svg"
     },
     "pt": {
       "id": "psalms",
@@ -4497,7 +4497,7 @@
         }
       ],
       "order": 70,
-      "image_path": "/illustrations/quest-hero.svg"
+      "image_path": "/illustrations/question-psalms.svg"
     },
     "sv": {
       "id": "psalms",
@@ -4560,7 +4560,7 @@
         }
       ],
       "order": 70,
-      "image_path": "/illustrations/quest-hero.svg"
+      "image_path": "/illustrations/question-psalms.svg"
     }
   }
 ]
