@@ -19,12 +19,20 @@ async fn eras_endpoints_return_seeded_data() -> Result<(), Box<dyn std::error::E
     assert_eq!(eras.len(), 2);
     assert_eq!(eras[0].get("name").and_then(|v| v.as_str()), Some("Creation"));
     assert_eq!(eras[0].get("order").and_then(|v| v.as_i64()), Some(10));
+    assert_eq!(
+        eras[0].get("image_path").and_then(|v| v.as_str()),
+        Some("/illustrations/question-creation.svg")
+    );
 
     let era_res = test_app.client.get(format!("{}/v1/eras/creation", test_app.base)).send().await?;
     assert_eq!(era_res.status(), StatusCode::OK);
     let era = era_res.json::<serde_json::Value>().await?;
     assert_eq!(era.get("id").and_then(|v| v.as_str()), Some("creation"));
     assert_eq!(era.get("name").and_then(|v| v.as_str()), Some("Creation"));
+    assert_eq!(
+        era.get("image_path").and_then(|v| v.as_str()),
+        Some("/illustrations/question-creation.svg")
+    );
 
     let episodes_res =
         test_app.client.get(format!("{}/v1/eras/creation/episodes", test_app.base)).send().await?;
@@ -172,6 +180,7 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "creation",
                 "name": "Creation",
                 "label": "Creation",
+                "image_path": "/illustrations/question-creation.svg",
                 "order": 10,
                 "books": ["Genesis"],
                 "episodes": [
@@ -239,6 +248,7 @@ async fn seed_eras(db: &mongodb::Database) -> mongodb::error::Result<()> {
                 "id": "exodus",
                 "name": "Exodus",
                 "label": "Exodus and Sinai Covenant",
+                "image_path": "/illustrations/question-covenant.svg",
                 "order": 20,
                 "books": ["Exodus"],
                 "episodes": [

@@ -23,6 +23,8 @@ pub async fn list_eras(db: &Database, lang: &str) -> mongodb::error::Result<Vec<
     let mut projection = doc! {"_id": 1, "type": 1};
     projection.insert(format!("{lang}.name"), 1);
     projection.insert(format!("{lang}.label"), 1);
+    projection.insert(format!("{lang}.image_path"), 1);
+    projection.insert(format!("{lang}.image_url"), 1);
     projection.insert(format!("{lang}.order"), 1);
     projection.insert(format!("{lang}.episodes"), 1);
 
@@ -91,11 +93,15 @@ pub async fn find_episode_for_era(
 fn parse_era_list_item(doc: Document, lang: &str) -> EraListItem {
     let locale = get_document_for_lang(&doc, lang);
     let episodes = locale.and_then(|d| get_array(d, "episodes")).unwrap_or_default();
+    let image_path = locale
+        .and_then(|d| get_string_opt(d, "image_path"))
+        .or_else(|| locale.and_then(|d| get_string_opt(d, "image_url")));
 
     EraListItem {
         id: get_string(&doc, "_id"),
         name: locale.and_then(|d| get_string_opt(d, "name")).unwrap_or_default(),
         label: locale.and_then(|d| get_string_opt(d, "label")).unwrap_or_default(),
+        image_path,
         order: locale.and_then(|d| get_i32_opt(d, "order")).unwrap_or(i32::MAX),
         era_type: get_optional_string(&doc, "type"),
         episode_count: episodes.len(),
@@ -214,11 +220,15 @@ fn parse_era(doc: Document, lang: &str) -> EraDto {
         .and_then(|b| b.as_array())
         .map(|arr| arr.iter().filter_map(Bson::as_str).map(str::to_owned).collect())
         .unwrap_or_default();
+    let image_path = locale
+        .and_then(|d| get_string_opt(d, "image_path"))
+        .or_else(|| locale.and_then(|d| get_string_opt(d, "image_url")));
 
     EraDto {
         id: get_string(&doc, "_id"),
         name: locale.and_then(|d| get_string_opt(d, "name")).unwrap_or_default(),
         label: locale.and_then(|d| get_string_opt(d, "label")).unwrap_or_default(),
+        image_path,
         order: locale.and_then(|d| get_i32_opt(d, "order")).unwrap_or(i32::MAX),
         era_type: get_optional_string(&doc, "type"),
         books,
@@ -311,9 +321,6 @@ fn sort_eras(eras: &mut [EraListItem]) {
     eras.sort_by(|a, b| {
         let a_is_meta = a.era_type.as_deref() == Some("meta");
         let b_is_meta = b.era_type.as_deref() == Some("meta");
-        a_is_meta
-            .cmp(&b_is_meta)
-            .then_with(|| a.order.cmp(&b.order))
-            .then_with(|| a.id.cmp(&b.id))
+        a_is_meta.cmp(&b_is_meta).then_with(|| a.order.cmp(&b.order)).then_with(|| a.id.cmp(&b.id))
     });
 }

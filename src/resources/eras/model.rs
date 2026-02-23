@@ -12,6 +12,7 @@ pub struct EraListItem {
     pub id: String,
     pub name: String,
     pub label: String,
+    pub image_path: Option<String>,
     pub order: i32,
     #[serde(rename = "type")]
     pub era_type: Option<String>,
@@ -23,6 +24,7 @@ pub struct EraDto {
     pub id: String,
     pub name: String,
     pub label: String,
+    pub image_path: Option<String>,
     pub order: i32,
     #[serde(rename = "type")]
     pub era_type: Option<String>,
