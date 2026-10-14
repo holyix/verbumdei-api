@@ -1,5 +1,11 @@
 # Verbumdei-api
 
+## About Verbum Dei
+
+Verbum Dei is a Catholic learning project whose web experience, Verbum Quest, uses quizzes to help people explore Scripture and the Catholic faith through Salvation History. Its purpose is to make learning about the Bible and Catholic teaching engaging, using multiple-choice questions with answer explanations. It is intended for Catholics deepening their understanding of the faith and anyone interested in learning about Scripture from a Catholic perspective.
+
+This repository provides the Rust API behind that experience. It stores quiz questions in MongoDB and serves localized questions, biblical eras and episodes, and language and level catalogs to the web application. It is intended for developers building or contributing to the Verbum Dei backend and its integration with the frontend.
+
 Backend skeleton for the Verbum Dei project.
 
 ## Layout
