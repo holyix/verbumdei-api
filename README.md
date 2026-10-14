@@ -6,6 +6,8 @@ Verbum Dei is a Catholic learning project whose web experience, Verbum Quest, us
 
 This repository provides the Rust API behind that experience. It stores quiz questions in MongoDB and serves localized questions, biblical eras and episodes, and language and level catalogs to the web application. It is intended for developers building or contributing to the Verbum Dei backend and its integration with the frontend.
 
+At its current stage, Verbum Dei works as a traditional client-server application: the web client requests quiz content from the backend, which serves questions stored in MongoDB. This provides the foundation for a long-term goal of connecting the backend to Magisterium AI to dynamically generate questions and answers based on each user's interests. That integration is a future goal and is not part of the current implementation.
+
 Backend skeleton for the Verbum Dei project.
 
 ## Layout
